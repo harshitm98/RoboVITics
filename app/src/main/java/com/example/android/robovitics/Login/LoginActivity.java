@@ -1,5 +1,6 @@
 package com.example.android.robovitics.Login;
 
+import android.content.Intent;
 import android.graphics.Paint;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.android.robovitics.MainActivity;
 import com.example.android.robovitics.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -43,34 +45,43 @@ public class LoginActivity extends AppCompatActivity {
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                createNewAccount();
+                login();
+            }
+        });
+
+        newAccountText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(LoginActivity.this,CreateNewActivity.class);
+                startActivity(i);
             }
         });
 
     }
 
-    public void createNewAccount() {
-        String mEmail, mPassword;
+    public void login() {
+        final String mEmail, mPassword;
 
         mEmail = emailId.getText().toString().trim();
         mPassword = password.getText().toString().trim();
 
-        mAuth.createUserWithEmailAndPassword(mEmail, mPassword)
+        mAuth.signInWithEmailAndPassword(mEmail, mPassword)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Log.d(TAG, "createUserWithEmail:success");
-                            Toast.makeText(LoginActivity.this, "Successfully created new account.",
-                                    Toast.LENGTH_SHORT).show();
-
+                            Log.d(TAG, "signInWithEmail:success");
+                            Intent i = new Intent(LoginActivity.this,MainActivity.class);
+                            startActivity(i);
+                            finish();
                         } else {
                             // If sign in fails, display a message to the user.
-                            Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                            Log.w(TAG, "signInWithEmail:failure", task.getException());
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
                         }
+
                     }
                 });
     }
