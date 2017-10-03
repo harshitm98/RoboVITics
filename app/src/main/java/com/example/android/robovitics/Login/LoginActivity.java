@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,7 +25,8 @@ public class LoginActivity extends AppCompatActivity {
 
     private final String TAG = "LoginActivity";
 
-    private TextView emailId, password, newAccountText;
+    private EditText emailId, password;
+    private TextView newAccountText, forgotPasswordText;
     private FloatingActionButton signInButton;
 
     private FirebaseAuth mAuth;
@@ -35,10 +37,12 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         signInButton = (FloatingActionButton)findViewById(R.id.sign_in);
-        emailId = (TextView)findViewById(R.id.email_id);
-        password = (TextView)findViewById(R.id.password);
+        emailId = (EditText)findViewById(R.id.email_id);
+        password = (EditText)findViewById(R.id.password);
         newAccountText = (TextView)findViewById(R.id.text_new_user);
         newAccountText.setPaintFlags(newAccountText.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
+        forgotPasswordText = (TextView)findViewById(R.id.text_forgot_password);
+        forgotPasswordText.setPaintFlags(newAccountText.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -53,6 +57,14 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(LoginActivity.this,CreateNewActivity.class);
+                startActivity(i);
+            }
+        });
+
+        forgotPasswordText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(LoginActivity.this,ForgotPasswordActivity.class);
                 startActivity(i);
             }
         });
