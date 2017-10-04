@@ -38,7 +38,8 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                             public void onComplete(@NonNull Task<Void> task) {
                                 if (task.isSuccessful()) {
                                     Log.d("ForgotPasswordActivity", "Email sent.");
-                                    Toast.makeText(ForgotPasswordActivity.this,"Mail has been sent!",Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(ForgotPasswordActivity.this,"Mail has been sent to " +
+                                            email.getText().toString().trim(),Toast.LENGTH_SHORT).show();
                                     finish();
                                 }
                             }

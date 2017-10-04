@@ -11,7 +11,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class Splash extends Activity {
 
-    private final int SPLASH_LENGTH = 3000;
+    private final int SPLASH_LENGTH = 2000;
 
     private FirebaseAuth mAuth;
 
