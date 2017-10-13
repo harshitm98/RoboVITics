@@ -21,8 +21,20 @@
             </intent-filter>
         </activity>
         <activity android:name=".Login.LoginActivity" />
-        <activity android:name=".Login.CreateNewActivity" />
-        <activity android:name=".Login.ForgotPasswordActivity"></activity>
+        <activity android:name=".Login.CreateNewActivity"
+            android:label="Create New Account"
+            android:parentActivityName=".Login.LoginActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.android.robovitics.Login.LoginActivity"/>
+        </activity>
+        <activity android:name=".Login.ForgotPasswordActivity"
+            android:label="Forgot Password"
+            android:parentActivityName=".Login.LoginActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.android.robovitics.Login.LoginActivity"/>
+        </activity>
     </application>
 
 </manifest>

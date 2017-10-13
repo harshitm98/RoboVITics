@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -22,7 +23,7 @@ public class CreateNewActivity extends AppCompatActivity {
     private String TAG = "CreateNewActivity";
 
     private EditText mEmailId, mPassword;
-    private FloatingActionButton newAccount;
+    private Button newAccount;
 
     private FirebaseAuth mAuth;
 
@@ -33,7 +34,7 @@ public class CreateNewActivity extends AppCompatActivity {
 
         mEmailId = (EditText)findViewById(R.id.email_id_new_account);
         mPassword = (EditText)findViewById(R.id.password_new_account);
-        newAccount = (FloatingActionButton)findViewById(R.id.create_new_account_fab);
+        newAccount = (Button)findViewById(R.id.create_new_account_fab);
 
         mAuth = FirebaseAuth.getInstance();
 

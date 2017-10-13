@@ -14,6 +14,20 @@
         android:orientation="vertical">
 
         <EditText
+            android:id="@+id/registration_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Registration Number"
+            android:inputType="textCapCharacters"/>
+
+        <EditText
+            android:id="@+id/full_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Full name"
+            android:inputType="textCapWords"/>
+
+        <EditText
             android:id="@+id/email_id_new_account"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -32,14 +46,15 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <android.support.design.widget.FloatingActionButton
+            <Button
                 android:id="@+id/create_new_account_fab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="4dp"
-                android:src="@drawable/ic_arrow_forward_black_24dp"/>
+                android:text="Verify me"
+                android:layout_centerHorizontal="true"
+                android:paddingLeft="50dp"
+                android:paddingRight="50dp"
+                android:layout_marginTop="35dp"/>
 
 
         </RelativeLayout>
