@@ -6,7 +6,15 @@
     android:layout_height="match_parent"
     tools:context="com.example.android.robovitics.Login.CreateNewActivity">
 
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"/>
+
     <LinearLayout
+        android:id="@+id/create_new_linear_layout"
         android:layout_centerInParent="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -14,7 +22,7 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/registration_number"
+            android:id="@+id/create_new_registration_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Registration Number"
@@ -38,8 +46,14 @@
             android:id="@+id/password_new_account"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:hint="Password"
+            android:inputType="textPassword"/>
+
+        <EditText
+            android:id="@+id/re_password_new_account"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Retype Password"
             android:inputType="textPassword"/>
 
 
@@ -50,7 +64,7 @@
                 android:id="@+id/create_new_account_fab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Verify me"
+                android:text="Create new account "
                 android:layout_centerHorizontal="true"
                 android:paddingLeft="50dp"
                 android:paddingRight="50dp"

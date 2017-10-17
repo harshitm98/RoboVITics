@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.widget.Toast;
 
 import com.example.android.robovitics.Login.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
@@ -34,8 +35,15 @@ public class Splash extends Activity {
                     finish();
                 }
                 else{
-                    Intent intent = new Intent(Splash.this,MainActivity.class);
-                    startActivity(intent);
+                    if(user.isEmailVerified()){
+                        Intent intent = new Intent(Splash.this,MainActivity.class);
+                        startActivity(intent);
+                    }
+                    else{
+                        Intent intent = new Intent(Splash.this, LoginActivity.class);
+                        startActivity(intent);
+                        Toast.makeText(Splash.this,"Your email isn't verified", Toast.LENGTH_SHORT);
+                    }
                     finish();
                 }
 
