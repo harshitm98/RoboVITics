@@ -44,8 +44,6 @@ public class LoginActivity extends AppCompatActivity {
     private DatabaseReference databaseReference;
     private ChildEventListener mChildEventListener;
 
-    private String sVerify;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -111,13 +109,8 @@ public class LoginActivity extends AppCompatActivity {
                             Log.d(TAG, "signInWithEmail:success");
                             user = mAuth.getCurrentUser();
                             listener();
-                            if(user!=null && sVerify.equals("1")){
-                                Intent i = new Intent(LoginActivity.this,MainActivity.class);
-                                startActivity(i);
-                                finish();
-                            }
-                            else if(sVerify.equals("0")){
-                                Intent i = new Intent(LoginActivity.this,VerifyActivity.class);
+                            if(user!=null) {
+                                Intent i = new Intent(LoginActivity.this, VerifyActivity.class);
                                 startActivity(i);
                                 finish();
                             }
@@ -141,34 +134,7 @@ public class LoginActivity extends AppCompatActivity {
                 });
     }
 
-    public void listener(){
-
-        mChildEventListener = new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                sVerify = dataSnapshot.child(user.getUid()).getValue().toString();
-                Log.i(TAG,dataSnapshot.toString());
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                sVerify = dataSnapshot.child(user.getUid()).getValue().toString();
-                Log.i(TAG,dataSnapshot.toString());
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {            }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-            }
-        };
-        databaseReference.addChildEventListener(mChildEventListener);
-
-    }
+    
 
     private void editorDelete(){
         layout.setOnLongClickListener(new View.OnLongClickListener() {

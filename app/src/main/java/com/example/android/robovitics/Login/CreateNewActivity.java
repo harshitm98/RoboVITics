@@ -1,5 +1,6 @@
 package com.example.android.robovitics.Login;
 
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -8,6 +9,9 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -70,7 +74,6 @@ public class CreateNewActivity extends AppCompatActivity {
                 }
             }
         });
-
         onChangingListener();
 
 
@@ -190,5 +193,9 @@ public class CreateNewActivity extends AppCompatActivity {
         }
         return true;
     }
+
+
+
+
 
 }

@@ -16,10 +16,11 @@
     <LinearLayout
         android:id="@+id/create_new_linear_layout"
         android:layout_centerInParent="true"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:layout_margin="16dp"
-        android:orientation="vertical">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
 
         <EditText
             android:id="@+id/create_new_registration_number"
@@ -57,9 +58,12 @@
             android:inputType="textPassword"/>
 
 
+
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <Button
                 android:id="@+id/create_new_account_fab"
                 android:layout_width="wrap_content"
@@ -70,7 +74,6 @@
                 android:paddingRight="50dp"
                 android:layout_marginTop="35dp"/>
 
-
         </RelativeLayout>
 
 
@@ -79,6 +82,10 @@
 
 
 
+
     </LinearLayout>
+
+
+
 
 </RelativeLayout>
