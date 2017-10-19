@@ -44,6 +44,8 @@ public class LoginActivity extends AppCompatActivity {
     private DatabaseReference databaseReference;
     private ChildEventListener mChildEventListener;
 
+    private String sVerify;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,11 +110,8 @@ public class LoginActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithEmail:success");
                             user = mAuth.getCurrentUser();
-                            listener();
                             if(user!=null) {
-                                Intent i = new Intent(LoginActivity.this, VerifyActivity.class);
-                                startActivity(i);
-                                finish();
+                                listener();
                             }
                             else{
                                 Toast.makeText(LoginActivity.this,"Problem logging in. Try again later",Toast.LENGTH_LONG).show();
@@ -145,6 +144,58 @@ public class LoginActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    public void listener(){
+
+        mChildEventListener = new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                Log.i(TAG,dataSnapshot.toString());
+                String vVerify;
+                vVerify = dataSnapshot.child("uid").getValue().toString();
+                if(vVerify.equals(FirebaseAuth.getInstance().getCurrentUser().getUid())){
+                    sVerify = dataSnapshot.child("verify").getValue().toString();
+                    if(sVerify.equals("0")){
+                        Toast.makeText(LoginActivity.this,"Your account hasn't been verified.",Toast.LENGTH_LONG).show();
+                        layout.setVisibility(View.VISIBLE);
+                        progressBar.setVisibility(View.GONE);
+                    }
+                    else if(sVerify.equals("1")){
+                        Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(i);
+                        finish();
+                    }
+                }
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                Log.i(TAG,dataSnapshot.toString());
+                String vVerify;
+                vVerify = dataSnapshot.child("uid").getValue().toString();
+                if(vVerify.equals(FirebaseAuth.getInstance().getCurrentUser().getUid())){
+                    sVerify = dataSnapshot.child("verify").getValue().toString();
+                    if(sVerify.equals("1")){
+                        Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(i);
+                        finish();
+                    }
+                }
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        };
+        databaseReference.addChildEventListener(mChildEventListener);
+
     }
 
 }

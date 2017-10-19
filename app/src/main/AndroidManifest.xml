@@ -37,7 +37,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.android.robovitics.Login.LoginActivity" />
         </activity>
-        <activity android:name=".Login.VerifyActivity"></activity>
     </application>
 
 </manifest>
