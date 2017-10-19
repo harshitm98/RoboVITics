@@ -35,19 +35,10 @@ public class Splash extends Activity {
                     finish();
                 }
                 else{
-                    if(user.isEmailVerified()){
-                        Intent intent = new Intent(Splash.this,MainActivity.class);
-                        startActivity(intent);
-                    }
-                    else{
-                        Intent intent = new Intent(Splash.this, LoginActivity.class);
-                        startActivity(intent);
-                        Toast.makeText(Splash.this,"Your email isn't verified", Toast.LENGTH_SHORT);
-                    }
+                    Intent intent = new Intent(Splash.this,MainActivity.class);
+                    startActivity(intent);
                     finish();
                 }
-
-
             }
         }, SPLASH_LENGTH);
     }

@@ -25,6 +25,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -92,13 +93,15 @@ public class CreateNewActivity extends AppCompatActivity {
                             Log.d(TAG, "createUserWithEmail:success");
                             //Toast.makeText(CreateNewActivity.this, "Successfully created new account.",Toast.LENGTH_SHORT).show();
                             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                            Toast.makeText(CreateNewActivity.this,"New account created successfully!",Toast.LENGTH_SHORT).show();
                             UID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                            databaseReference.child(UID).child("uid").setValue(UID);
                             databaseReference.child(UID).child("reg").setValue(mRegitrationNumber.getText().toString());
                             databaseReference.child(UID).child("name").setValue(mFullName.getText().toString());
                             databaseReference.child(UID).child("verify").setValue(0);
                             databaseReference.child(UID).child("details").setValue(0);
+                            updateUserName();
                             finish();
+                            Toast.makeText(CreateNewActivity.this,"New account created successfully!",Toast.LENGTH_SHORT).show();
 
                         } else {
                             // If sign in fails, display a message to the user.
@@ -194,6 +197,24 @@ public class CreateNewActivity extends AppCompatActivity {
         }
         return true;
     }
+
+    public void updateUserName() {
+        FirebaseUser users = FirebaseAuth.getInstance().getCurrentUser();
+
+        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
+                .setDisplayName(mFullName.getText().toString())
+                .build();
+
+        users.updateProfile(profileUpdates)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Log.d(TAG, "User profile updated.");
+                        }
+                    }
+                });
+        }
 
 
 

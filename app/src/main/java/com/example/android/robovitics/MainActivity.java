@@ -13,14 +13,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.example.android.robovitics.Login.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     public String icon_color = "#0f1458";
+    private TextView userName, emailId;
+    private FirebaseAuth mAuth;
+    private FirebaseDatabase database;
+    private DatabaseReference ref;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +54,9 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+        updateName();
     }
 
     @Override
@@ -105,6 +116,20 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void updateName(){
+
+        emailId = (TextView)findViewById(R.id.email_id_menu);
+        database = FirebaseDatabase.getInstance();
+        ref = database.getReference("pending_member");
+        mAuth = FirebaseAuth.getInstance();
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View hView =  navigationView.getHeaderView(0);
+        TextView nav_user = (TextView)hView.findViewById(R.id.name_menu);
+        TextView nav_email = (TextView)hView.findViewById(R.id.email_id_menu);
+        nav_email.setText(mAuth.getCurrentUser().getEmail());
+        nav_user.setText(mAuth.getCurrentUser().getDisplayName());
     }
 
 }

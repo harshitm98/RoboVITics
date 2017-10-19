@@ -31,6 +31,6 @@
         android:id="@+id/email_id_menu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="hmhmrock@gmail.com" />
+        android:text="hmhmrocks@gmail.com" />
 
 </LinearLayout>

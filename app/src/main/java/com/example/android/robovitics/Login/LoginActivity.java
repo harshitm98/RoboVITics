@@ -45,6 +45,7 @@ public class LoginActivity extends AppCompatActivity {
     private ChildEventListener mChildEventListener;
 
     private String sVerify;
+    public static String userName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -161,6 +162,7 @@ public class LoginActivity extends AppCompatActivity {
                 vVerify = dataSnapshot.child("uid").getValue().toString();
                 if(vVerify.equals(FirebaseAuth.getInstance().getCurrentUser().getUid())){
                     sVerify = dataSnapshot.child("verify").getValue().toString();
+                    userName = dataSnapshot.child("name").getValue().toString();
                     if(sVerify.equals("0")){
                         Toast.makeText(LoginActivity.this,"Your account hasn't been verified.",Toast.LENGTH_LONG).show();
                         layout.setVisibility(View.VISIBLE);
@@ -191,9 +193,17 @@ public class LoginActivity extends AppCompatActivity {
                 if(vVerify.equals(FirebaseAuth.getInstance().getCurrentUser().getUid())){
                     sVerify = dataSnapshot.child("verify").getValue().toString();
                     if(sVerify.equals("1")){
-                        Intent i = new Intent(LoginActivity.this, MainActivity.class);
-                        startActivity(i);
-                        finish();
+                        String details = dataSnapshot.child("details").getValue().toString();
+                        if(details.equals("0")){
+                            Intent i = new Intent(LoginActivity.this, DetailsActivity.class);
+                            startActivity(i);
+                            finish();
+                        }
+                        else if(details.equals("1")){
+                            Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                            startActivity(i);
+                            finish();
+                        }
                     }
                 }
             }
