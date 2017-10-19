@@ -97,6 +97,7 @@ public class CreateNewActivity extends AppCompatActivity {
                             databaseReference.child(UID).child("reg").setValue(mRegitrationNumber.getText().toString());
                             databaseReference.child(UID).child("name").setValue(mFullName.getText().toString());
                             databaseReference.child(UID).child("verify").setValue(0);
+                            databaseReference.child(UID).child("details").setValue(0);
                             finish();
 
                         } else {

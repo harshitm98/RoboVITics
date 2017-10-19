@@ -68,7 +68,12 @@ public class LoginActivity extends AppCompatActivity {
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                login();
+                if(emailId.length() != 0 && password.length()!= 0){
+                    login();
+                }
+                else{
+                    Toast.makeText(LoginActivity.this,"Fields cannot be empty!",Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -162,9 +167,18 @@ public class LoginActivity extends AppCompatActivity {
                         progressBar.setVisibility(View.GONE);
                     }
                     else if(sVerify.equals("1")){
-                        Intent i = new Intent(LoginActivity.this, MainActivity.class);
-                        startActivity(i);
-                        finish();
+                        String details = dataSnapshot.child("details").getValue().toString();
+                        if(details.equals("0")){
+                            Intent i = new Intent(LoginActivity.this, DetailsActivity.class);
+                            startActivity(i);
+                            finish();
+                        }
+                        else if(details.equals("1")){
+                            Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                            startActivity(i);
+                            finish();
+                        }
+
                     }
                 }
             }
