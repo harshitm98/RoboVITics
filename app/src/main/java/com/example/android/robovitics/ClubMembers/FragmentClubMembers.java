@@ -54,6 +54,7 @@ public class FragmentClubMembers extends Fragment {
         clubMembersObjects = new ArrayList<>();
         clubMemberAdapter = new ClubMemberAdapter(getContext(),clubMembersObjects);
 
+
         addingMembersInClubMembersObject();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -71,7 +72,6 @@ public class FragmentClubMembers extends Fragment {
                 startActivity(intent);
             }
         });
-
     }
 
     public void  addingMembersInClubMembersObject(){
@@ -111,7 +111,6 @@ public class FragmentClubMembers extends Fragment {
             public void onCancelled(DatabaseError databaseError) {
             }
         };
-        //databaseReference.addChildEventListener(childEventListener);
         query.addChildEventListener(childEventListener);
     }
 }
