@@ -19,6 +19,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.android.robovitics.ClubMembers.FragmentClubMembers;
+import com.example.android.robovitics.ClubProject.FragmentProjects;
 import com.example.android.robovitics.Login.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -128,7 +129,7 @@ public class MainActivity extends AppCompatActivity
                 break;
 
             case R.id.nav_project:
-                fragment = new FragmentClubMembers();
+                fragment = new FragmentProjects();
                 break;
 
             case R.id.nav_inventory:
