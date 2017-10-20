@@ -39,17 +39,16 @@ public class ClubMemberAdapter extends ArrayAdapter<ClubMembersObject> {
         final TextView name = (TextView)listitem.findViewById(R.id.list_name);
         name.setText(object.getsName());
 
-        name.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getContext(),name.getText(),Toast.LENGTH_SHORT).show();
-            }
-        });
+//        name.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Toast.makeText(getContext(),name.getText(),Toast.LENGTH_SHORT).show();
+//            }
+//        });
 
         /*
         TODO: Insert imageView and display the image
          */
-
 
         return listitem;
     }

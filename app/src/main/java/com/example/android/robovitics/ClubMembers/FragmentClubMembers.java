@@ -1,11 +1,13 @@
 package com.example.android.robovitics.ClubMembers;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.example.android.robovitics.R;
@@ -54,6 +56,22 @@ public class FragmentClubMembers extends Fragment {
 
         addingMembersInClubMembersObject();
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = new Intent(getActivity(),ProfileActivity.class);
+                ClubMembersObject object = (ClubMembersObject)listView.getAdapter().getItem(i);
+                intent.putExtra("name",object.getsName());
+                intent.putExtra("reg",object.getRegistrationNumber());
+                intent.putExtra("phone_number",object.getPhoneNumber());
+                intent.putExtra("room_number",object.getRoomNumber());
+                intent.putExtra("skills",object.getSkills());
+                intent.putExtra("email",object.getEmailId());
+                intent.putExtra("uid",object.getUID());
+                startActivity(intent);
+            }
+        });
+
     }
 
     public void  addingMembersInClubMembersObject(){
@@ -67,6 +85,8 @@ public class FragmentClubMembers extends Fragment {
                     object.setPhoneNumber(dataSnapshot.child("phone_number").getValue().toString());
                     object.setRoomNumber(dataSnapshot.child("room_number").getValue().toString());
                     object.setSkills(dataSnapshot.child("skills").getValue().toString());
+                    object.setEmailId(dataSnapshot.child("email").getValue().toString());
+                    object.setUID(dataSnapshot.child("uid").getValue().toString());
                     clubMembersObjects.add(object);
                     listView.setAdapter(clubMemberAdapter);
                 }

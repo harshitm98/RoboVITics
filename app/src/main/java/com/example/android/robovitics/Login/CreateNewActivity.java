@@ -99,6 +99,7 @@ public class CreateNewActivity extends AppCompatActivity {
                             databaseReference.child(UID).child("name").setValue(mFullName.getText().toString());
                             databaseReference.child(UID).child("verify").setValue(0);
                             databaseReference.child(UID).child("details").setValue(0);
+                            databaseReference.child(UID).child("email").setValue(user.getEmail());
                             updateUserName();
                             finish();
                             Toast.makeText(CreateNewActivity.this,"New account created successfully!",Toast.LENGTH_SHORT).show();
