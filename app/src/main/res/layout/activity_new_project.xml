@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_margin="8dp"
     tools:context="com.example.android.robovitics.ClubProject.NewProjectActivity">
 
     <LinearLayout
@@ -25,6 +26,7 @@
             android:hint="What is the problem you are trying to solve? "/>
 
         <CheckBox
+            android:id="@+id/checkbox_existing_solution"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Is there an existing solution to this problem?"
@@ -45,11 +47,19 @@
             android:hint="How many group members you would be needing for this project? Describe their roles as well."/>
 
         <EditText
-            android:id="@+id/propose_research_work"
+            android:id="@+id/propose_new_research_work"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:gravity="start"
             android:hint="Upload all your research work in Google Drive folder and then paste the link over here"/>
+
+        <CheckBox
+            android:id="@+id/checkbox_anonymous"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Post as ANONYMOUS"
+            />
     </LinearLayout>
+
 
 </ScrollView>
