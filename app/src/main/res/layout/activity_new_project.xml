@@ -16,7 +16,8 @@
             android:id="@+id/propose_new_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Name of the project"/>
+            android:hint="Name of the project"
+            android:inputType="textCapWords"/>
 
         <EditText
             android:id="@+id/propose_new_problem_statement"
