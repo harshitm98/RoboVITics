@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.android.robovitics.ClubProject.NewProjectActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/propose_new_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Name of the project"/>
+
+        <EditText
+            android:id="@+id/propose_new_problem_statement"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:gravity="start"
+            android:hint="What is the problem you are trying to solve? "/>
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Is there an existing solution to this problem?"
+            android:textSize="18sp"/>
+
+        <EditText
+            android:id="@+id/propose_new_solution_offered"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:gravity="start"
+            android:hint="What solution do you offer? And if there is an existing solution then how are going to implement it?"/>
+
+        <EditText
+            android:id="@+id/propose_new_members_required"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:gravity="start"
+            android:hint="How many group members you would be needing for this project? Describe their roles as well."/>
+
+        <EditText
+            android:id="@+id/propose_research_work"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:gravity="start"
+            android:hint="Upload all your research work in Google Drive folder and then paste the link over here"/>
+    </LinearLayout>
+
+</ScrollView>

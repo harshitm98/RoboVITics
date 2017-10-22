@@ -40,7 +40,14 @@
         <activity
             android:name=".Login.DetailsActivity"
             android:label="Additional details" />
-        <activity android:name=".ClubMembers.ProfileActivity"
+        <activity
+            android:name=".ClubMembers.ProfileActivity"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.android.robovitics.MainActivity" />
+        </activity>
+        <activity android:name=".ClubProject.NewProjectActivity"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

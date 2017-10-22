@@ -13,6 +13,7 @@
         android:layout_weight="1">
 
         <Button
+            android:id="@+id/current_projects"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="32dp"
@@ -27,6 +28,7 @@
         android:layout_weight="1">
 
         <Button
+            android:id="@+id/proposed_projects"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="32dp"
@@ -41,6 +43,7 @@
         android:layout_weight="1">
 
         <Button
+            android:id="@+id/propose_new_project"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="32dp"

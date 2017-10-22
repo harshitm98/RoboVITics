@@ -1,11 +1,13 @@
 package com.example.android.robovitics.ClubProject;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.android.robovitics.R;
 
@@ -14,6 +16,9 @@ import com.example.android.robovitics.R;
  */
 
 public class FragmentProjects extends Fragment {
+
+    private Button proposeNewProject;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -24,6 +29,15 @@ public class FragmentProjects extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         getActivity().setTitle("Projects");
+
+        proposeNewProject = (Button)view.findViewById(R.id.propose_new_project);
+        proposeNewProject.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(),NewProjectActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 }
