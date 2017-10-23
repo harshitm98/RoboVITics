@@ -47,13 +47,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.android.robovitics.MainActivity" />
         </activity>
-        <activity android:name=".ClubProject.NewProjectActivity"
-            android:parentActivityName=".MainActivity"
-            android:label="A New Idea">
+        <activity
+            android:name=".ClubProject.NewProjectActivity"
+            android:label="A New Idea"
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.android.robovitics.MainActivity" />
         </activity>
+        <activity android:name=".ClubProject.ProposedProjectsActivity"></activity>
     </application>
 
 </manifest>

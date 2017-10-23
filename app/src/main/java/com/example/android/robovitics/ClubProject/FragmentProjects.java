@@ -17,7 +17,7 @@ import com.example.android.robovitics.R;
 
 public class FragmentProjects extends Fragment {
 
-    private Button proposeNewProject;
+    private Button proposeNewProject, newProposedProjects;
 
     @Nullable
     @Override
@@ -35,6 +35,15 @@ public class FragmentProjects extends Fragment {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(),NewProjectActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        newProposedProjects = (Button)view.findViewById(R.id.proposed_projects);
+        newProposedProjects.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(),ProposedProjectsActivity.class);
                 startActivity(intent);
             }
         });
