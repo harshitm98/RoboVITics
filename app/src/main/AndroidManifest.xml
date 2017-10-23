@@ -48,7 +48,8 @@
                 android:value="com.example.android.robovitics.MainActivity" />
         </activity>
         <activity android:name=".ClubProject.NewProjectActivity"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".MainActivity"
+            android:label="A New Idea">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.android.robovitics.MainActivity" />
