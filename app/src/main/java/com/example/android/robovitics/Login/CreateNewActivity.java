@@ -1,5 +1,7 @@
 package com.example.android.robovitics.Login;
 
+import android.content.res.Resources;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -17,6 +19,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.android.robovitics.R;
@@ -41,6 +44,8 @@ public class CreateNewActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private LinearLayout layout;
 
+    private Typeface boldFont,regularFont;
+
     private FirebaseAuth mAuth;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
@@ -50,8 +55,8 @@ public class CreateNewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        labelFont();
         setContentView(R.layout.activity_create_new);
-
         mFullName = (EditText)findViewById(R.id.full_name);
         mRegitrationNumber = (EditText)findViewById(R.id.create_new_registration_number);
         mEmailId = (EditText)findViewById(R.id.email_id_new_account);
@@ -60,6 +65,15 @@ public class CreateNewActivity extends AppCompatActivity {
         newAccount = (Button)findViewById(R.id.create_new_account_fab);
         progressBar = (ProgressBar)findViewById(R.id.progress_bar);
         layout = (LinearLayout)findViewById(R.id.create_new_linear_layout);
+        boldFont = Typeface.createFromAsset(getAssets(),"montserrat_bold.ttf");
+        regularFont = Typeface.createFromAsset(getAssets(),"montserrat_regular.ttf");
+        newAccount.setTypeface(boldFont);
+        mFullName.setTypeface(regularFont);
+        mRegitrationNumber.setTypeface(regularFont);
+        mEmailId.setTypeface(regularFont);
+        mPassword.setTypeface(regularFont);
+        mRePassword.setTypeface(regularFont);
+
 
         mAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
@@ -168,6 +182,9 @@ public class CreateNewActivity extends AppCompatActivity {
                 if(mRePassword.getText().toString().equals(mPassword.getText().toString())){
                     mRePassword.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.ic_check_circle,0);
                 }
+                else{
+                    mRePassword.setCompoundDrawablesWithIntrinsicBounds(0,0,R.drawable.ic_chat_black_24dp,0);
+                }
             }
 
             @Override
@@ -218,7 +235,14 @@ public class CreateNewActivity extends AppCompatActivity {
         }
 
 
-
+    public void labelFont(){
+        int actionBarTitle = Resources.getSystem().getIdentifier("action_bar_title", "id", "android");
+        TextView actionBarTitleView = (TextView) getWindow().findViewById(actionBarTitle);
+        Typeface robotoBoldCondensedItalic = Typeface.createFromAsset(getAssets(), "montserrat_bold.ttf");
+        if(actionBarTitleView != null){
+            actionBarTitleView.setTypeface(robotoBoldCondensedItalic);
+        }
+    }
 
 
 }

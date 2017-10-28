@@ -27,6 +27,7 @@ public class NewProjectActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
 
     private String project_number;
+    private int project_id;
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -77,11 +78,13 @@ public class NewProjectActivity extends AppCompatActivity {
                     if(mutableData.getValue() == null){
                         mutableData.setValue(0);
                         project_number = "project_" + (0);
+                        project_id = 0;
                     }
                     else{
                         int count = mutableData.getValue(Integer.class);
                         mutableData.setValue(count + 1);
                         project_number = "project_" + (count + 1);
+                        project_id = count + 1;
                     }
                     return Transaction.success(mutableData);
                 }
@@ -89,11 +92,13 @@ public class NewProjectActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(DatabaseError databaseError, boolean b, DataSnapshot dataSnapshot) {
                     if(databaseError == null){
+                        databaseReference.child(project_number).child("project_number").setValue(project_id);
                         databaseReference.child(project_number).child("project_name").setValue(nameOfTheProject.getText().toString());
                         databaseReference.child(project_number).child("problem_statement").setValue(problemStatement.getText().toString());
                         databaseReference.child(project_number).child("solution_offered").setValue(solutionOffered.getText().toString());
                         databaseReference.child(project_number).child("members_required").setValue(membersRequired.getText().toString());
                         databaseReference.child(project_number).child("researched_work").setValue(researchedWork.getText().toString());
+                        databaseReference.child(project_number).child("number_of_plus_one").setValue(0);
                         if(existingSolutionCheckBox.isChecked()){
                             databaseReference.child(project_number).child("existing_solution").setValue("Yes");
                         }

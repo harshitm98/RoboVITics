@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.android.robovitics.Login.LoginActivity">
+    tools:context="com.example.android.robovitics.Login.LoginActivity"
+    android:background="@color/colorPrimary">
 
     <ProgressBar
         android:id="@+id/login_progress"
@@ -13,22 +14,41 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
+
+
     <LinearLayout
         android:id="@+id/login_linear_layout"
-        android:layout_centerInParent="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:layout_margin="16dp"
-        android:orientation="vertical">
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            android:id="@+id/club_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="42sp"
+            android:text="roboVITics"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="75dp"
+            android:gravity="center" />
+
+
 
         <android.support.design.widget.TextInputLayout
+            android:id="@+id/email_text_input_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:textColorHint="#FFFF"
+            android:theme="@style/TextLabel">
 
             <android.support.design.widget.TextInputEditText
                 android:id="@+id/email_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="#FFFF"
                 android:hint="Email"
                 android:inputType="textEmailAddress"/>
 
@@ -39,6 +59,8 @@
             android:id="@+id/etPasswordLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColorHint="#FFFF"
+            android:theme="@style/TextLabel"
             app:passwordToggleDrawable="@drawable/ic_password"
             app:passwordToggleEnabled="true">
 
@@ -46,6 +68,7 @@
                 android:id="@+id/password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textColor="#FFFF"
                 android:layout_marginTop="8dp"
                 android:hint="Password"
                 android:inputType="textPassword"/>
@@ -55,16 +78,21 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-            <android.support.design.widget.FloatingActionButton
+
+            <Button
                 android:id="@+id/sign_in"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="4dp"
-                android:src="@drawable/ic_arrow_forward_black_24dp"/>
+                android:text="SIGN me IN"
+                android:background="@drawable/white_button_attribute"
+                android:textColor="@color/colorPrimary"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="22dp"
+                android:paddingLeft="52dp"
+                android:paddingRight="52dp"/>
 
             <TextView
+                android:textColor="#FFFFFF"
                 android:id="@+id/text_new_user"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -74,6 +102,7 @@
                 android:text="New User? Click here"/>
 
             <TextView
+                android:textColor="#FFFFFF"
                 android:id="@+id/text_forgot_password"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

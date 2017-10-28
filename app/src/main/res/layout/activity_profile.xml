@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="8dp"
     tools:context="com.example.android.robovitics.ClubMembers.ProfileActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:padding="12dp">
 
         <ImageView
             android:id="@+id/profile_profile_img"
@@ -19,160 +19,184 @@
             android:layout_marginBottom="20dp"
             android:src="@mipmap/ic_launcher_round" />
 
-        <TextView
-            android:id="@+id/profile_name_holder"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/profile_profile_img"
-            android:layout_marginBottom="8dp"
-            android:text="Name:  "
-            android:textColor="@android:color/black"
-            android:textSize="22sp" />
-
-        <TextView
-            android:id="@+id/profile_name"
+        <LinearLayout
+            android:id="@+id/ll1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/profile_profile_img"
+            android:orientation="vertical"
             android:layout_marginBottom="8dp"
-            android:layout_toRightOf="@+id/profile_name_holder"
-            android:textColor="@android:color/black"
-            android:textSize="22sp"
-            tools:text="Harshit Maheshwari" />
+            android:layout_below="@+id/profile_profile_img">
 
-        <TextView
-            android:id="@+id/profile_reg_holder"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/profile_name"
-            android:layout_marginBottom="8dp"
-            android:text="Reg Number:  "
-            android:textColor="@android:color/black"
-            android:textSize="22sp" />
+            <TextView
+                android:id="@+id/profile_name_holder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/profile_profile_img"
+                android:text="Name"/>
 
-        <TextView
-            android:id="@+id/profile_reg"
+            <TextView
+                android:id="@+id/profile_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/profile_profile_img"
+                android:layout_toRightOf="@+id/profile_name_holder"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                tools:text="Harshit Maheshwari" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll2"
+            android:layout_below="@+id/ll1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/profile_name"
             android:layout_marginBottom="8dp"
-            android:layout_toRightOf="@+id/profile_reg_holder"
-            android:textColor="@android:color/black"
-            android:textSize="22sp"
-            tools:text="16BCI0039" />
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/profile_phone_holder"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/profile_reg"
-            android:layout_marginBottom="8dp"
-            android:text="Phone:  "
-            android:textColor="@android:color/black"
-            android:textSize="22sp" />
+            <TextView
+                android:id="@+id/profile_reg_holder"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/profile_name"
+                android:text="Registration Number" />
 
-        <TextView
-            android:id="@+id/profile_phone"
+            <TextView
+                android:id="@+id/profile_reg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/profile_name"
+                android:layout_toRightOf="@+id/profile_reg_holder"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                tools:text="16BCI0039" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll3"
+            android:layout_below="@+id/ll2"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/profile_reg_holder"
             android:layout_marginBottom="8dp"
-            android:layout_toRightOf="@+id/profile_phone_holder"
-            android:textColor="@android:color/black"
-            android:textSize="22sp"
-            tools:text="9167086310" />
+            android:layout_height="wrap_content">
 
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/profile_room_holder"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/profile_phone"
-            android:layout_marginBottom="8dp"
-            android:text="Room Number:  "
-            android:textColor="@android:color/black"
-            android:textSize="22sp" />
+                <TextView
+                    android:id="@+id/profile_phone_holder"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/profile_reg"
+                    android:text="Phone" />
 
-        <TextView
-            android:id="@+id/profile_room"
+                <TextView
+                    android:id="@+id/profile_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"
+                    tools:text="9167086310" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/calling"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="16dp"
+                android:src="@drawable/ic_call_black_24dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll4"
+            android:orientation="vertical"
+            android:layout_below="@+id/ll3"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/profile_phone_holder"
             android:layout_marginBottom="8dp"
-            android:layout_toRightOf="@+id/profile_room_holder"
-            android:textColor="@android:color/black"
-            android:textSize="22sp"
-            tools:text="K327" />
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/profile_email_holder"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/profile_room"
-            android:layout_marginBottom="8dp"
-            android:text="Email:  "
-            android:textColor="@android:color/black"
-            android:textSize="22sp" />
+            <TextView
+                android:id="@+id/profile_room_holder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Room Number" />
 
-        <TextView
-            android:id="@+id/profile_email"
+            <TextView
+                android:id="@+id/profile_room"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                tools:text="K327" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll5"
+            android:layout_below="@+id/ll4"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/profile_room_holder"
             android:layout_marginBottom="8dp"
-            android:layout_toRightOf="@+id/profile_email_holder"
-            android:textColor="@android:color/black"
-            android:textSize="22sp"
-            tools:text="hmhmrock@gmail.com" />
+            android:layout_height="wrap_content">
 
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/profile_email_holder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Email" />
 
-        <TextView
-            android:id="@+id/profile_skills_holder"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/profile_email"
-            android:layout_marginBottom="8dp"
-            android:text="Skills:  "
-            android:textColor="@android:color/black"
-            android:textSize="22sp"/>
+                <TextView
+                    android:id="@+id/profile_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"
+                    tools:text="hmhmrock@gmail.com" />
 
-        <TextView
-            android:id="@+id/profile_skills"
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/mailing"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_email_black_24dp"
+                android:layout_marginRight="16dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll6"
+            android:layout_below="@+id/ll5"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/profile_email"
-            android:layout_marginBottom="8dp"
-            android:layout_toRightOf="@+id/profile_email_holder"
-            android:textColor="@android:color/black"
-            android:textSize="22sp"
-            tools:text="Android App Development!" />
+            android:layout_height="wrap_content">
 
-        <android.support.design.widget.FloatingActionButton
-            android:layout_marginTop="35dp"
-            android:id="@+id/calling"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:layout_centerHorizontal="true"
-            android:src="@drawable/ic_call_black_24dp"
-            android:layout_marginLeft="36dp"
-            android:layout_alignParentLeft="true"
-            android:scaleType="center"
-            android:elevation="8dp"
-            android:layout_below="@+id/profile_skills"/>
+            <TextView
+                android:id="@+id/profile_skills_holder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Skills"/>
 
-        <android.support.design.widget.FloatingActionButton
-            android:layout_marginTop="35dp"
-            android:id="@+id/mailing"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="36dp"
-            android:scaleType="center"
-            android:elevation="8dp"
-            android:src="@drawable/ic_email_black_24dp"
-            android:layout_below="@+id/profile_skills"/>
+            <TextView
+                android:id="@+id/profile_skills"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                tools:text="Android App Development!" />
+
+        </LinearLayout>
 
     </RelativeLayout>
-
 
 </ScrollView>

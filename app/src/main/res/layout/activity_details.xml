@@ -43,8 +43,9 @@
         <EditText
             android:id="@+id/skills"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="145dp"
             android:hint="Skills"
+            android:gravity="start"
             android:inputType="text" />
 
         <RelativeLayout
@@ -52,6 +53,8 @@
             android:layout_height="wrap_content">
 
             <Button
+                android:background="@drawable/button_attribute"
+                android:textColor="@android:color/white"
                 android:id="@+id/submit_details"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

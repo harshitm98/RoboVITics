@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.android.robovitics.R;
@@ -15,7 +16,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private String sUID,sName,sReg,sPhone,sRoom,sSkills,sEmail;
     private TextView eName, eReg, ePhone, eRoom, eSkills, eEmail;
-    private FloatingActionButton callingButton, mailingButton;
+    private ImageView callingButton, mailingButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,8 +38,8 @@ public class ProfileActivity extends AppCompatActivity {
         eSkills = (TextView)findViewById(R.id.profile_skills);
         eEmail = (TextView)findViewById(R.id.profile_email);
 
-        callingButton = (FloatingActionButton)findViewById(R.id.calling);
-        mailingButton = (FloatingActionButton)findViewById(R.id.mailing);
+        callingButton = (ImageView)findViewById(R.id.calling);
+        mailingButton = (ImageView)findViewById(R.id.mailing);
 
         eName.setText(sName);
         eReg.setText(sReg);

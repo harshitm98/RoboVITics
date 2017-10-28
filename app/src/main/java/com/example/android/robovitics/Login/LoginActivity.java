@@ -1,14 +1,19 @@
 package com.example.android.robovitics.Login;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextPaint;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -28,13 +33,15 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class LoginActivity extends AppCompatActivity {
+import java.lang.reflect.Field;
+
+public class LoginActivity extends Activity {
 
     private final String TAG = "LoginActivity";
 
     private EditText emailId, password;
-    private TextView newAccountText, forgotPasswordText;
-    private FloatingActionButton signInButton;
+    private TextView newAccountText, forgotPasswordText, clubName;
+    private Button signInButton;
     private ProgressBar progressBar;
     private LinearLayout layout;
 
@@ -44,6 +51,8 @@ public class LoginActivity extends AppCompatActivity {
     private DatabaseReference databaseReference;
     private ChildEventListener mChildEventListener;
 
+    private Typeface boldFont, regularFont;
+
     private String sVerify;
     public static String userName;
 
@@ -52,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        signInButton = (FloatingActionButton)findViewById(R.id.sign_in);
+        signInButton = (Button)findViewById(R.id.sign_in);
         emailId = (EditText)findViewById(R.id.email_id);
         password = (EditText)findViewById(R.id.password);
         newAccountText = (TextView)findViewById(R.id.text_new_user);
@@ -61,10 +70,17 @@ public class LoginActivity extends AppCompatActivity {
         forgotPasswordText.setPaintFlags(newAccountText.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         progressBar = (ProgressBar)findViewById(R.id.login_progress);
         layout = (LinearLayout)findViewById(R.id.login_linear_layout);
+        clubName = (TextView)findViewById(R.id.club_name);
+        boldFont = Typeface.createFromAsset(getAssets(),"montserrat_bold.ttf");
+        regularFont = Typeface.createFromAsset(getAssets(),"montserrat_regular.ttf");
+        clubName.setTypeface(regularFont);
+        newAccountText.setTypeface(regularFont);
+        forgotPasswordText.setTypeface(regularFont);
 
         mAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("pending_member");
+        updatingUI();
 
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -152,30 +168,28 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    public void listener(){
+    public void listener() {
 
         mChildEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Log.i(TAG,dataSnapshot.toString());
+                Log.i(TAG, dataSnapshot.toString());
                 String vVerify;
                 vVerify = dataSnapshot.child("uid").getValue().toString();
-                if(vVerify.equals(FirebaseAuth.getInstance().getCurrentUser().getUid())){
+                if (vVerify.equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
                     sVerify = dataSnapshot.child("verify").getValue().toString();
                     userName = dataSnapshot.child("name").getValue().toString();
-                    if(sVerify.equals("0")){
-                        Toast.makeText(LoginActivity.this,"Your account hasn't been verified.",Toast.LENGTH_LONG).show();
+                    if (sVerify.equals("0")) {
+                        Toast.makeText(LoginActivity.this, "Your account hasn't been verified.", Toast.LENGTH_LONG).show();
                         layout.setVisibility(View.VISIBLE);
                         progressBar.setVisibility(View.GONE);
-                    }
-                    else if(sVerify.equals("1")){
+                    } else if (sVerify.equals("1")) {
                         String details = dataSnapshot.child("details").getValue().toString();
-                        if(details.equals("0")){
+                        if (details.equals("0")) {
                             Intent i = new Intent(LoginActivity.this, DetailsActivity.class);
                             startActivity(i);
                             finish();
-                        }
-                        else if(details.equals("1")){
+                        } else if (details.equals("1")) {
                             Intent i = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(i);
                             finish();
@@ -187,19 +201,18 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-                Log.i(TAG,dataSnapshot.toString());
+                Log.i(TAG, dataSnapshot.toString());
                 String vVerify;
                 vVerify = dataSnapshot.child("uid").getValue().toString();
-                if(vVerify.equals(FirebaseAuth.getInstance().getCurrentUser().getUid())){
+                if (vVerify.equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
                     sVerify = dataSnapshot.child("verify").getValue().toString();
-                    if(sVerify.equals("1")){
+                    if (sVerify.equals("1")) {
                         String details = dataSnapshot.child("details").getValue().toString();
-                        if(details.equals("0")){
+                        if (details.equals("0")) {
                             Intent i = new Intent(LoginActivity.this, DetailsActivity.class);
                             startActivity(i);
                             finish();
-                        }
-                        else if(details.equals("1")){
+                        } else if (details.equals("1")) {
                             Intent i = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(i);
                             finish();
@@ -209,17 +222,55 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {            }
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+            }
 
             @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {            }
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+            }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
             }
         };
         databaseReference.addChildEventListener(mChildEventListener);
-
     }
 
+    private void updatingUI() {
+        final Typeface tf = Typeface.createFromAsset(getAssets(), "montserrat_regular.ttf");
+        final TextInputLayout til = (TextInputLayout) findViewById(R.id.email_text_input_layout);
+        til.getEditText().setTypeface(tf);
+        try {
+            // Retrieve the CollapsingTextHelper Field
+            final Field cthf = til.getClass().getDeclaredField("mCollapsingTextHelper");
+            cthf.setAccessible(true);
+
+            // Retrieve an instance of CollapsingTextHelper and its TextPaint
+            final Object cth = cthf.get(til);
+            final Field tpf = cth.getClass().getDeclaredField("mTextPaint");
+            tpf.setAccessible(true);
+
+            // Apply your Typeface to the CollapsingTextHelper TextPaint
+            ((TextPaint) tpf.get(cth)).setTypeface(tf);
+        } catch (Exception ignored) {
+            // Nothing to do
+        }
+        final TextInputLayout til2 = (TextInputLayout) findViewById(R.id.etPasswordLayout);
+        til.getEditText().setTypeface(tf);
+        try {
+            // Retrieve the CollapsingTextHelper Field
+            final Field cthf = til.getClass().getDeclaredField("mCollapsingTextHelper");
+            cthf.setAccessible(true);
+
+            // Retrieve an instance of CollapsingTextHelper and its TextPaint
+            final Object cth = cthf.get(til);
+            final Field tpf = cth.getClass().getDeclaredField("mTextPaint");
+            tpf.setAccessible(true);
+
+            // Apply your Typeface to the CollapsingTextHelper TextPaint
+            ((TextPaint) tpf.get(cth)).setTypeface(tf);
+        } catch (Exception ignored) {
+            // Nothing to do
+        }
+    }
 }

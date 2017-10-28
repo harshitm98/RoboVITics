@@ -1,5 +1,6 @@
 package com.example.android.robovitics.Login;
 
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -26,6 +27,8 @@ public class DetailsActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseUser user;
 
+    private Typeface boldFont, regularFont;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +45,7 @@ public class DetailsActivity extends AppCompatActivity {
         user = mAuth.getCurrentUser();
 
         onChangingListener();
+        updateLayout();
 
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,5 +117,14 @@ public class DetailsActivity extends AppCompatActivity {
         else{
             Toast.makeText(DetailsActivity.this, "One or more fields are empty.", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void updateLayout(){
+        boldFont = Typeface.createFromAsset(getAssets(),"montserrat_bold.ttf");
+        regularFont = Typeface.createFromAsset(getAssets(),"montserrat_regular.ttf");
+        phoneNumber.setTypeface(regularFont);
+        roomNumber.setTypeface(regularFont);
+        skills.setTypeface(regularFont);
+        submitButton.setTypeface(boldFont);
     }
 }
