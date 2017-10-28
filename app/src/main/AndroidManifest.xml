@@ -12,6 +12,7 @@
         <activity
             android:name=".MainActivity"
             android:label="RoboVITics"
+            android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Splash">
             <intent-filter>
@@ -20,7 +21,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Login.LoginActivity" />
+        <activity android:name=".Login.LoginActivity"
+            android:launchMode="singleTop"/>
         <activity
             android:name=".Login.CreateNewActivity"
             android:label="Create New Account"
