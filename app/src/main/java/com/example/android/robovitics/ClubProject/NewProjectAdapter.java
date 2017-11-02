@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
@@ -46,6 +47,8 @@ public class NewProjectAdapter extends ArrayAdapter<NewProjectObject> {
     private FirebaseAuth auth;
     private ChildEventListener childEventListener;
 
+    private boolean exists;
+
     public NewProjectAdapter(@NonNull Context context, @NonNull List<NewProjectObject> objects) {
         super(context, 0, 0, objects);
     }
@@ -65,15 +68,20 @@ public class NewProjectAdapter extends ArrayAdapter<NewProjectObject> {
         projectName.setText(object.getProjectName());
 
         final ImageView plusOne = (ImageView)listItem.findViewById(R.id.proposed_project_plus_one);
-        checkExistingPlusOne(object,plusOne);
+        if(checkExistingPlusOne(object,plusOne)){
+            int color = Color.parseColor("#00BF9A");
+            Log.i("NewProjectAdapter","Check1");
+            plusOne.setColorFilter(color);
+        }
+
 
         plusOne.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View view) {
                 plusOneTheThing(object);
-                Toast.makeText(getContext(),"+1ed " + projectName.getText().toString(),Toast.LENGTH_SHORT).show();
-                DrawableCompat.setTint(plusOne.getDrawable(), ContextCompat.getColor(getContext(), R.color.colorAccent));
+                int color = Color.parseColor("#00BF9A"); //The color u want
+                plusOne.setColorFilter(color);
             }
         });
 
@@ -82,7 +90,7 @@ public class NewProjectAdapter extends ArrayAdapter<NewProjectObject> {
         return listItem;
     }
 
-    private void plusOneTheThing(NewProjectObject object){
+    private void plusOneTheThing(final NewProjectObject object){
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("projects").child("new_proposed_projects");
         auth = FirebaseAuth.getInstance();
@@ -117,6 +125,10 @@ public class NewProjectAdapter extends ArrayAdapter<NewProjectObject> {
                             count++;
                             databaseReference.child("project_" + projectNumber).child("number_of_plus_one").setValue(count);
                             databaseReference.child("plus_one_by").push().setValue(clubMembersObject);
+                            Toast.makeText(getContext(), "+1'ed successfully" , Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+                            Toast.makeText(getContext(), "You've already +1ed " + object.getProjectName(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 }
@@ -136,23 +148,24 @@ public class NewProjectAdapter extends ArrayAdapter<NewProjectObject> {
         databaseReference.addChildEventListener(childEventListener);
     }
 
-    private void checkExistingPlusOne(final NewProjectObject object, final ImageView plusOne){
+    private boolean checkExistingPlusOne(final NewProjectObject object, final ImageView plusOne){
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("projects").child("new_proposed_projects");
         auth = FirebaseAuth.getInstance();
+
         childEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                Log.i("NewProjectAdapter", "Logcat 1:" + dataSnapshot.toString());
                 if(dataSnapshot.child("project_name").getValue().toString().equals(object.getProjectName())){
-                    Log.i("NewProjectAdapter", "Logcat 2:" + dataSnapshot.toString());
                     if(dataSnapshot.child("number_of_plus_one").getValue(Integer.class) != 0){
-
                         final String UID = auth.getCurrentUser().getUid();
-                        if(dataSnapshot.child("plus_one_by").getValue().toString().contains(UID)){
-                            DrawableCompat.setTint(plusOne.getDrawable(), ContextCompat.getColor(getContext(), R.color.colorAccent));
-                            //Toast.makeText(getContext(),"You have +1'ed " + object.getProjectName(),Toast.LENGTH_SHORT).show();
-                        }
+                        exists = dataSnapshot.child("plus_one_by").getValue().toString().contains(UID);
+                        int color = Color.parseColor("#00BF9A"); //The color u want
+                        plusOne.setColorFilter(color);
+                        Log.i("NewProjectAdapter", exists + "");
+                    }
+                    else{
+                        exists = false;
                     }
                 }
             }
@@ -170,6 +183,7 @@ public class NewProjectAdapter extends ArrayAdapter<NewProjectObject> {
             public void onCancelled(DatabaseError databaseError) {}
         };
         databaseReference.addChildEventListener(childEventListener);
+        return exists;
     }
 
 }
