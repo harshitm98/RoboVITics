@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_margin="8dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.android.robovitics.ClubProject.ProposedProjectDetailsActivity">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/pll1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="4dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Project Name"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Paper Pass"
+                android:textSize="21sp"
+                android:textColor="#000000"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/pll2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/pll1"
+            android:layout_margin="4dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Problem Statement"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="It becomes really difficult to transfer papers during CATs and FAT."
+                android:textSize="21sp"
+                android:textColor="#000000"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/pll3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/pll2"
+            android:layout_margin="4dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Solution Offered"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Producing an Android based application which is capable of sharing papers."
+                android:textSize="21sp"
+                android:textColor="#000000"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/pll4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/pll3"
+            android:layout_margin="4dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Exisiting Solution"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Yes"
+                android:textSize="21sp"
+                android:textColor="#000000"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/pll5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/pll4"
+            android:layout_margin="4dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Members required"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="R Pi knowledge and Android app developer"
+                android:textSize="21sp"
+                android:textColor="#000000"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/pll6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/pll5"
+            android:layout_margin="4dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Researched data"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="www.google.com"
+                android:textSize="21sp"
+                android:textColor="@android:color/holo_blue_dark"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/pll7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/pll6"
+            android:layout_margin="4dp"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Posted by"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Harshit Maheshwari"
+                android:textSize="21sp"
+                android:textColor="#000000"/>
+        </LinearLayout>
+
+        <View
+            android:id="@+id/line_1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#808080"
+            android:layout_below="@id/pll7"
+            android:layout_margin="32dp"
+            />
+
+        <ListView
+            android:id="@+id/comments_list_view"
+            android:layout_below="@+id/line_1"
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:stackFromBottom="true">
+        </ListView>
+
+        <LinearLayout
+            android:id="@+id/pll9"
+            android:layout_below="@+id/comments_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <EditText
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:hint="Comment"/>
+            <android.support.design.widget.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:src="@drawable/ic_send_black_24dp"/>
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</ScrollView>

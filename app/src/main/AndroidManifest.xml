@@ -21,8 +21,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Login.LoginActivity"
-            android:launchMode="singleTop"/>
+        <activity
+            android:name=".Login.LoginActivity"
+            android:launchMode="singleTop" />
         <activity
             android:name=".Login.CreateNewActivity"
             android:label="Create New Account"
@@ -57,12 +58,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.android.robovitics.MainActivity" />
         </activity>
-        <activity android:name=".ClubProject.ProposedProjectsActivity"
+        <activity
+            android:name=".ClubProject.ProposedProjectsActivity"
             android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.android.robovitics.MainActivity" />
         </activity>
+        <activity android:name=".ClubProject.ProposedProjectDetailsActivity"></activity>
     </application>
 
 </manifest>
