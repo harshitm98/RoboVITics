@@ -39,6 +39,8 @@ import static com.example.android.robovitics.R.color.colorAccent;
 
 public class NewProjectAdapter extends ArrayAdapter<NewProjectObject> {
 
+    // TODO: In version 2 of this app include the feature to unlike the proposed ideas.
+
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
     private FirebaseAuth auth;
@@ -63,13 +65,14 @@ public class NewProjectAdapter extends ArrayAdapter<NewProjectObject> {
         projectName.setText(object.getProjectName());
 
         final ImageView plusOne = (ImageView)listItem.findViewById(R.id.proposed_project_plus_one);
+        checkExistingPlusOne(object,plusOne);
 
         plusOne.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("ResourceAsColor")
             @Override
             public void onClick(View view) {
                 plusOneTheThing(object);
-                Toast.makeText(getContext(),projectName.getText().toString(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),"+1ed " + projectName.getText().toString(),Toast.LENGTH_SHORT).show();
                 DrawableCompat.setTint(plusOne.getDrawable(), ContextCompat.getColor(getContext(), R.color.colorAccent));
             }
         });
@@ -99,7 +102,6 @@ public class NewProjectAdapter extends ArrayAdapter<NewProjectObject> {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 if(dataSnapshot.child("project_name").getValue().toString().equals(projectName)){
-                    Log.i("NewProjectAdapter", dataSnapshot.toString());
                     int count;
                     int projectNumber;
                     count = dataSnapshot.child("number_of_plus_one").getValue(Integer.class);
@@ -119,28 +121,55 @@ public class NewProjectAdapter extends ArrayAdapter<NewProjectObject> {
                     }
                 }
             }
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {            }
 
             @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
-
-            }
+            public void onChildRemoved(DataSnapshot dataSnapshot) {            }
 
             @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {
-
-            }
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {            }
 
             @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
+            public void onCancelled(DatabaseError databaseError) {            }
         };
         databaseReference.addChildEventListener(childEventListener);
-
     }
+
+    private void checkExistingPlusOne(final NewProjectObject object, final ImageView plusOne){
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference("projects").child("new_proposed_projects");
+        auth = FirebaseAuth.getInstance();
+        childEventListener = new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                Log.i("NewProjectAdapter", "Logcat 1:" + dataSnapshot.toString());
+                if(dataSnapshot.child("project_name").getValue().toString().equals(object.getProjectName())){
+                    Log.i("NewProjectAdapter", "Logcat 2:" + dataSnapshot.toString());
+                    if(dataSnapshot.child("number_of_plus_one").getValue(Integer.class) != 0){
+
+                        final String UID = auth.getCurrentUser().getUid();
+                        if(dataSnapshot.child("plus_one_by").getValue().toString().contains(UID)){
+                            DrawableCompat.setTint(plusOne.getDrawable(), ContextCompat.getColor(getContext(), R.color.colorAccent));
+                            //Toast.makeText(getContext(),"You have +1'ed " + object.getProjectName(),Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {}
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {}
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {}
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        };
+        databaseReference.addChildEventListener(childEventListener);
+    }
+
 }
