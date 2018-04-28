@@ -70,18 +70,10 @@ public class LoginActivity extends Activity {
         forgotPasswordText.setPaintFlags(newAccountText.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         progressBar = (ProgressBar)findViewById(R.id.login_progress);
         layout = (LinearLayout)findViewById(R.id.login_linear_layout);
-        clubName = (TextView)findViewById(R.id.club_name);
-        boldFont = Typeface.createFromAsset(getAssets(),"montserrat_bold.ttf");
-        regularFont = Typeface.createFromAsset(getAssets(),"montserrat_regular.ttf");
-        clubName.setTypeface(regularFont);
-        newAccountText.setTypeface(regularFont);
-        forgotPasswordText.setTypeface(regularFont);
 
         mAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference("pending_member");
-        updatingUI();
-
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -236,41 +228,4 @@ public class LoginActivity extends Activity {
         databaseReference.addChildEventListener(mChildEventListener);
     }
 
-    private void updatingUI() {
-        final Typeface tf = Typeface.createFromAsset(getAssets(), "montserrat_regular.ttf");
-        final TextInputLayout til = (TextInputLayout) findViewById(R.id.email_text_input_layout);
-        til.getEditText().setTypeface(tf);
-        try {
-            // Retrieve the CollapsingTextHelper Field
-            final Field cthf = til.getClass().getDeclaredField("mCollapsingTextHelper");
-            cthf.setAccessible(true);
-
-            // Retrieve an instance of CollapsingTextHelper and its TextPaint
-            final Object cth = cthf.get(til);
-            final Field tpf = cth.getClass().getDeclaredField("mTextPaint");
-            tpf.setAccessible(true);
-
-            // Apply your Typeface to the CollapsingTextHelper TextPaint
-            ((TextPaint) tpf.get(cth)).setTypeface(tf);
-        } catch (Exception ignored) {
-            // Nothing to do
-        }
-        final TextInputLayout til2 = (TextInputLayout) findViewById(R.id.etPasswordLayout);
-        til.getEditText().setTypeface(tf);
-        try {
-            // Retrieve the CollapsingTextHelper Field
-            final Field cthf = til.getClass().getDeclaredField("mCollapsingTextHelper");
-            cthf.setAccessible(true);
-
-            // Retrieve an instance of CollapsingTextHelper and its TextPaint
-            final Object cth = cthf.get(til);
-            final Field tpf = cth.getClass().getDeclaredField("mTextPaint");
-            tpf.setAccessible(true);
-
-            // Apply your Typeface to the CollapsingTextHelper TextPaint
-            ((TextPaint) tpf.get(cth)).setTypeface(tf);
-        } catch (Exception ignored) {
-            // Nothing to do
-        }
-    }
 }
