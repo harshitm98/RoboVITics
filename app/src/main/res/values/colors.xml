@@ -3,4 +3,8 @@
     <color name="colorPrimary">#00AA8D</color>
     <color name="colorPrimaryDark">#008975</color>
     <color name="colorAccent">#00BF9A</color>
+    <color name="shade_notification_bar">#000</color>
+    <color name="shade_action_bar">#212121</color>
+    <color name="shade_background">#303030</color>
+    <color name="shade_card">#424242</color>
 </resources>
