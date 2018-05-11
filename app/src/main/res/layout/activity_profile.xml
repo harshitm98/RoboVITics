@@ -17,7 +17,7 @@
             android:layout_height="100dp"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="20dp"
-            android:src="@mipmap/ic_launcher_round" />
+            android:src="@mipmap/ic_launcher" />
 
         <LinearLayout
             android:id="@+id/ll1"
@@ -40,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/profile_profile_img"
                 android:layout_toRightOf="@+id/profile_name_holder"
-                android:textColor="@android:color/black"
+                android:textColor="@android:color/white"
                 android:textSize="20sp"
                 tools:text="Harshit Maheshwari" />
         </LinearLayout>
@@ -66,7 +66,7 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/profile_name"
                 android:layout_toRightOf="@+id/profile_reg_holder"
-                android:textColor="@android:color/black"
+                android:textColor="@android:color/white"
                 android:textSize="20sp"
                 tools:text="16BCI0039" />
 
@@ -97,18 +97,11 @@
                     android:id="@+id/profile_phone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@android:color/black"
+                    android:textColor="@android:color/white"
                     android:textSize="20sp"
                     tools:text="9167086310" />
 
             </LinearLayout>
-
-            <ImageView
-                android:id="@+id/calling"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginRight="16dp"
-                android:src="@drawable/ic_call_black_24dp"/>
 
         </LinearLayout>
 
@@ -130,7 +123,7 @@
                 android:id="@+id/profile_room"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@android:color/black"
+                android:textColor="@android:color/white"
                 android:textSize="20sp"
                 tools:text="K327" />
 
@@ -159,7 +152,7 @@
                     android:id="@+id/profile_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@android:color/black"
+                    android:textColor="@android:color/white"
                     android:textSize="20sp"
                     tools:text="hmhmrock@gmail.com" />
 
@@ -191,11 +184,20 @@
                 android:id="@+id/profile_skills"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@android:color/black"
+                android:textColor="@android:color/white"
                 android:textSize="20sp"
                 tools:text="Android App Development!" />
 
         </LinearLayout>
+
+        <ImageView
+            android:id="@+id/calling"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@+id/ll3"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_call_black_24dp" />
 
     </RelativeLayout>
 

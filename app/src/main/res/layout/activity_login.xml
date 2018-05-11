@@ -33,7 +33,7 @@
             android:text="roboVITics"
             android:textColor="@android:color/white"
             android:layout_marginBottom="75dp"
-            android:gravity="center" />
+            android:gravity="center"/>
 
 
 
@@ -112,9 +112,6 @@
                 android:text="Forgot Password?"/>
 
         </RelativeLayout>
-
-
-
 
 
 
