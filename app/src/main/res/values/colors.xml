@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#00AA8D</color>
-    <color name="colorPrimaryDark">#008975</color>
-    <color name="colorAccent">#00BF9A</color>
+    <color name="colorPrimary">#212121</color>
+    <color name="colorPrimaryDark">#000</color>
+    <color name="colorAccent">#FFF</color>
     <color name="shade_notification_bar">#000</color>
     <color name="shade_action_bar">#212121</color>
     <color name="shade_background">#303030</color>
     <color name="shade_card">#424242</color>
+    <color name="primary_color">#FFFFFF</color>
+    <color name="secondary_color">#B3FFFFFF</color>
+    <color name="disable_color">#80FFFFFF</color>
+    <color name="divider_color">#1FFFFFFF</color>
 </resources>
