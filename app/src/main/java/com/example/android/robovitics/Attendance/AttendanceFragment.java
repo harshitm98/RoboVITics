@@ -3,6 +3,7 @@ package com.example.android.robovitics.Attendance;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -43,7 +44,7 @@ public class AttendanceFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    private Button giveAttendance;
+    private Button giveAttendance, takeAttendance;
 
     public AttendanceFragment() {
         // Required empty public constructor
@@ -168,6 +169,14 @@ public class AttendanceFragment extends Fragment {
                 giveAttendanceMethod();
             }
         });
+        takeAttendance = view.findViewById(R.id.attendance_take);
+        takeAttendance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), TakeAttendanceActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public void giveAttendanceMethod(){
@@ -175,7 +184,7 @@ public class AttendanceFragment extends Fragment {
         View view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_alert_dialog,null);
         ImageView imageView = view.findViewById(R.id.alert_qr_code);
         try {
-            Bitmap bmp =  encodeAsBitmap(FirebaseAuth.getInstance().getCurrentUser().getUid());
+            Bitmap bmp =  encodeAsBitmap(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
             imageView.setImageBitmap(bmp);
         } catch (Exception e) {
             e.printStackTrace();

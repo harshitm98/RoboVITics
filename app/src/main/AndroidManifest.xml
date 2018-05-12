@@ -65,7 +65,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.android.robovitics.MainActivity" />
         </activity>
-        <activity android:name=".ClubProject.ProposedProjectDetailsActivity"></activity>
+        <activity android:name=".ClubProject.ProposedProjectDetailsActivity" />
+        <activity android:name=".Attendance.TakeAttendanceActivity"></activity>
     </application>
 
 </manifest>
