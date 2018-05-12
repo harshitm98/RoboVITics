@@ -103,7 +103,7 @@
                         android:layout_gravity="center"
                         android:gravity="center"
                         android:text="Call"
-                        android:textColor="#6272a4"
+                        android:textColor="#26A69A"
                         android:fontFamily="@font/quicksandbold"
                         android:background="?android:attr/selectableItemBackground" />
                 </LinearLayout>

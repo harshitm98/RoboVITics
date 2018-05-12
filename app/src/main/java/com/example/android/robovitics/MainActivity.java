@@ -1,11 +1,9 @@
 package com.example.android.robovitics;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -18,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.example.android.robovitics.Attendance.AttendanceFragment;
 import com.example.android.robovitics.ClubMembers.FragmentClubMembers;
 import com.example.android.robovitics.ClubProject.FragmentProjects;
 import com.example.android.robovitics.Login.LoginActivity;
@@ -26,7 +25,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, AttendanceFragment.OnFragmentInteractionListener{
 
     public String icon_color = "#0f1458";
     private TextView userName, emailId;
@@ -137,7 +136,7 @@ public class MainActivity extends AppCompatActivity
                 break;
 
             case R.id.nav_attendance:
-                fragment = new FragmentClubMembers();
+                fragment = new AttendanceFragment();
                 break;
         }
 
@@ -153,5 +152,8 @@ public class MainActivity extends AppCompatActivity
     }
 
 
+    @Override
+    public void onFragmentInteraction(Uri uri) {
 
+    }
 }

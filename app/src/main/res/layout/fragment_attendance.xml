@@ -1,0 +1,33 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.android.robovitics.Attendance.AttendanceFragment">
+
+    <Button
+        android:id="@+id/attendance_meeting"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Meeting attendance"/>
+    <Button
+        android:id="@+id/attendance_lab"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Lab attendance"/>
+    <Button
+        android:id="@+id/attendance_take"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Take attendance"/>
+    <Button
+        android:id="@+id/attendance_give"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:text="Give attendance"/>
+
+</LinearLayout>
