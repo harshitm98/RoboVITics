@@ -34,10 +34,10 @@ public class DetailsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
-        phoneNumber = (EditText)findViewById(R.id.phone_number);
-        roomNumber = (EditText)findViewById(R.id.room_number);
-        skills = (EditText)findViewById(R.id.skills);
-        submitButton = (Button)findViewById(R.id.submit_details);
+        phoneNumber = findViewById(R.id.phone_number);
+        roomNumber = findViewById(R.id.room_number);
+        skills = findViewById(R.id.skills);
+        submitButton = findViewById(R.id.submit_details);
 
         database = FirebaseDatabase.getInstance();
         reference = database.getReference("pending_member");
@@ -112,6 +112,7 @@ public class DetailsActivity extends AppCompatActivity {
             reference.child(user.getUid()).child("room_number").setValue(roomNumber.getText().toString());
             reference.child(user.getUid()).child("skills").setValue(skills.getText().toString());
             reference.child(user.getUid()).child("details").setValue(1);
+            reference.child(user.getUid()).child("attendance_permission").setValue(0);
             Toast.makeText(DetailsActivity.this, "Details submitted.", Toast.LENGTH_SHORT).show();
         }
         else{
