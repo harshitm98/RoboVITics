@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,11 @@ import android.widget.Toast;
 
 import com.example.android.robovitics.R;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
@@ -33,6 +39,8 @@ import com.google.zxing.common.BitMatrix;
  * create an instance of this fragment.
  */
 public class AttendanceFragment extends Fragment {
+
+    private static final String TAG = "AttendanceFragment";
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -76,6 +84,7 @@ public class AttendanceFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
 
         }
+        takeAttendancePrivileges();
     }
 
     @Override
@@ -200,6 +209,41 @@ public class AttendanceFragment extends Fragment {
             }
         });
         ad.show();
+    }
+
+    private void takeAttendancePrivileges(){
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = firebaseDatabase.getReference("pending_member");
+        databaseReference.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                Log.i(TAG, "onChildAdded: " + dataSnapshot);
+                if(dataSnapshot.child("uid").getValue().toString().equals(FirebaseAuth.getInstance().getCurrentUser().getUid())){
+                    if(dataSnapshot.child("attendance_permission").getValue().toString().equals("0")){
+                        takeAttendance.setVisibility(View.GONE);
+                    }
+                    else{
+                        takeAttendance.setVisibility(View.VISIBLE);
+                    }
+                }
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+            }
+        });
     }
 
 
