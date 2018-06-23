@@ -11,4 +11,6 @@
     <color name="secondary_color">#B3FFFFFF</color>
     <color name="disable_color">#80FFFFFF</color>
     <color name="divider_color">#1FFFFFFF</color>
+    <color name="positive_on_dark">#00E676</color>
+    <color name="negative_on_dark">#F44336</color>
 </resources>

@@ -6,9 +6,9 @@
     tools:context=".Attendance.TabAttendanceFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/sample_test"
+    <ListView
+        android:id="@+id/attendance_list_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"></ListView>
 
 </FrameLayout>
