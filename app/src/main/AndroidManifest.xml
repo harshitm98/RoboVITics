@@ -67,7 +67,22 @@
         </activity>
         <activity android:name=".ClubProject.ProposedProjectDetailsActivity" />
         <activity android:name=".Attendance.TakeAttendanceActivity" />
-        <activity android:name=".Attendance.AttendanceViewActivity"></activity>
+        <activity
+            android:name=".Attendance.AttendanceViewActivity"
+            android:label="Attendance"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.android.robovitics.MainActivity" />
+        </activity>
+        <activity
+            android:name=".Attendance.AttendanceDetailsActivity"
+            android:label="Attendance Details"
+            android:parentActivityName=".Attendance.AttendanceViewActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.android.robovitics.Attendance.AttendanceViewActivity" />
+        </activity>
     </application>
 
 </manifest>

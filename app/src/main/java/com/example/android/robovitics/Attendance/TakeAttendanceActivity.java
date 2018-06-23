@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -62,6 +63,7 @@ public class TakeAttendanceActivity extends AppCompatActivity implements Adapter
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         setContentView(R.layout.activity_take_attendance);
         settingupmember();
         spinnerSetup();
@@ -260,6 +262,8 @@ public class TakeAttendanceActivity extends AppCompatActivity implements Adapter
         databaseReference.child("meeting").child(txtDate.getText().toString() + "_" + type).child("attended").setValue(attended);
         databaseReference.child("meeting").child(txtDate.getText().toString() + "_" + type).child("not_attended").setValue(notAttend);
         databaseReference.child("meeting").child(txtDate.getText().toString() + "_" + type).child("reason").setValue(reason.getText().toString());
+        databaseReference.child("meeting").child(txtDate.getText().toString() + "_" + type).child("absentees").setValue(notAttended.size());
+        databaseReference.child("meeting").child(txtDate.getText().toString() + "_" + type).child("attendees").setValue(arrayList.size());
         Toast.makeText(this, "Attendance uploaded!", Toast.LENGTH_SHORT).show();
         finish();
     }

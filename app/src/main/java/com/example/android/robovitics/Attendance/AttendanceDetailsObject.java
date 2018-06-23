@@ -8,6 +8,25 @@ public class AttendanceDetailsObject {
     private String time;
     private String reason;
     private String type;
+    private String attendees;
+    private String absentees;
+
+
+    public String getAttendees() {
+        return attendees;
+    }
+
+    public void setAttendees(String attendees) {
+        this.attendees = attendees;
+    }
+
+    public String getAbsentees() {
+        return absentees;
+    }
+
+    public void setAbsentees(String absentees) {
+        this.absentees = absentees;
+    }
 
 
     public String getAttended() {
