@@ -103,7 +103,7 @@
                         android:layout_height="wrap_content"
                         android:text="Attended by"/>
                     <TextView
-                        android:id="@+id/reg_number_list"
+                        android:id="@+id/list_attendees"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="22sp"
@@ -120,7 +120,7 @@
                         android:layout_height="wrap_content"
                         android:text="Absentees"/>
                     <TextView
-                        android:id="@+id/room_number_list"
+                        android:id="@+id/list_absentees"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="22sp"

@@ -260,6 +260,8 @@ public class TakeAttendanceActivity extends AppCompatActivity implements Adapter
         databaseReference.child("meeting").child(txtDate.getText().toString() + "_" + type).child("attended").setValue(attended);
         databaseReference.child("meeting").child(txtDate.getText().toString() + "_" + type).child("not_attended").setValue(notAttend);
         databaseReference.child("meeting").child(txtDate.getText().toString() + "_" + type).child("reason").setValue(reason.getText().toString());
+        databaseReference.child("meeting").child(txtDate.getText().toString() + "_" + type).child("absentees").setValue(notAttended.size());
+        databaseReference.child("meeting").child(txtDate.getText().toString() + "_" + type).child("attendees").setValue(arrayList.size());
         Toast.makeText(this, "Attendance uploaded!", Toast.LENGTH_SHORT).show();
         finish();
     }

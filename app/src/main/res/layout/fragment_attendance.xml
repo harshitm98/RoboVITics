@@ -10,13 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:text="Meeting attendance"/>
-    <Button
-        android:id="@+id/attendance_lab"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:text="Lab attendance"/>
+        android:text="View attendance"/>
     <Button
         android:id="@+id/attendance_take"
         android:layout_width="match_parent"
