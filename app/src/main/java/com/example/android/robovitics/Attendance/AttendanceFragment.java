@@ -52,7 +52,7 @@ public class AttendanceFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    private Button giveAttendance, takeAttendance;
+    private Button giveAttendance, takeAttendance, viewAttendance;
 
     public AttendanceFragment() {
         // Required empty public constructor
@@ -186,6 +186,17 @@ public class AttendanceFragment extends Fragment {
                 startActivity(intent);
             }
         });
+
+        viewAttendance = view.findViewById(R.id.attendance_meeting);
+        viewAttendance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(),AttendanceViewActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
     }
 
     public void giveAttendanceMethod(){
