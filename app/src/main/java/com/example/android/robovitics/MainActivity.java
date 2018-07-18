@@ -18,7 +18,7 @@ import android.widget.TextView;
 
 import com.example.android.robovitics.Attendance.AttendanceFragment;
 import com.example.android.robovitics.ClubMembers.FragmentClubMembers;
-import com.example.android.robovitics.ClubProject.FragmentProjects;
+import com.example.android.robovitics.Inventory.InventoryFragment;
 import com.example.android.robovitics.Login.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
+        openFragment();
         updateName();
     }
 
@@ -127,12 +127,8 @@ public class MainActivity extends AppCompatActivity
                 fragment = new FragmentClubMembers();
                 break;
 
-            case R.id.nav_project:
-                fragment = new FragmentProjects();
-                break;
-
             case R.id.nav_inventory:
-                fragment = new FragmentClubMembers();
+                fragment = new InventoryFragment();
                 break;
 
             case R.id.nav_attendance:
@@ -154,6 +150,16 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onFragmentInteraction(Uri uri) {
+
+    }
+
+    public void openFragment() {
+        Fragment fragment = new FragmentClubMembers();
+        if (fragment != null) {
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.content_frame, fragment);
+            ft.commit();
+        }
 
     }
 }

@@ -7,10 +7,6 @@
             android:icon="@drawable/ic_people"
             android:title="Club Members" />
         <item
-            android:id="@+id/nav_project"
-            android:icon="@drawable/ic_project"
-            android:title="Projects" />
-        <item
             android:id="@+id/nav_inventory"
             android:icon="@drawable/ic_memory_black_24dp"
             android:title="Inventory" />

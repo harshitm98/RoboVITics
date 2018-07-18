@@ -15,7 +15,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Replace this text with Club logo"
+        android:text="RoboVITics"
         android:textSize="20sp" />
 
     <TextView
