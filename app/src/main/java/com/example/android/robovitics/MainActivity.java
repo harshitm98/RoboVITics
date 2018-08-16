@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.example.android.robovitics.Attendance.AttendanceFragment;
 import com.example.android.robovitics.ClubMembers.FragmentClubMembers;
+import com.example.android.robovitics.FreeSlots.FreeSlotsFragment;
 import com.example.android.robovitics.Inventory.InventoryFragment;
 import com.example.android.robovitics.Login.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //openFragment();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -134,6 +136,10 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_attendance:
                 fragment = new AttendanceFragment();
                 break;
+
+            case R.id.nav_free_slots:
+                fragment = new FreeSlotsFragment();
+                break;
         }
 
         if (fragment != null) {
@@ -154,12 +160,9 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void openFragment() {
-        Fragment fragment = new FragmentClubMembers();
-        if (fragment != null) {
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.content_frame, fragment);
-            ft.commit();
-        }
+        FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
+        tx.replace(R.id.content_frame, new FragmentClubMembers());
+        tx.commit();
 
     }
 }

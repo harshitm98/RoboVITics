@@ -170,7 +170,7 @@ public class AttendanceFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
+        getActivity().setTitle("Attendance");
         giveAttendance = view.findViewById(R.id.attendance_give);
         giveAttendance.setOnClickListener(new View.OnClickListener() {
             @Override
