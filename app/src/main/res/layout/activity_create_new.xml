@@ -67,7 +67,7 @@
 
             <Button
                 android:background="@drawable/button_attribute"
-                android:textColor="@android:color/white"
+                android:textColor="@android:color/black"
                 android:id="@+id/create_new_account_fab"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

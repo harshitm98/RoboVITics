@@ -80,7 +80,7 @@ public class FragmentClubMembers extends Fragment {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 ClubMembersObject object = new ClubMembersObject();
-                if(dataSnapshot.child("verify").getValue().toString().equals("1")){
+                if(dataSnapshot.child("details").getValue().toString().equals("1")){
                     object.setsName(dataSnapshot.child("name").getValue().toString());
                     object.setRegistrationNumber(dataSnapshot.child("reg").getValue().toString());
                     object.setPhoneNumber(dataSnapshot.child("phone_number").getValue().toString());

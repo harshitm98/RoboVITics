@@ -65,14 +65,6 @@ public class CreateNewActivity extends AppCompatActivity {
         newAccount = (Button)findViewById(R.id.create_new_account_fab);
         progressBar = (ProgressBar)findViewById(R.id.progress_bar);
         layout = (LinearLayout)findViewById(R.id.create_new_linear_layout);
-        boldFont = Typeface.createFromAsset(getAssets(),"montserrat_bold.ttf");
-        regularFont = Typeface.createFromAsset(getAssets(),"montserrat_regular.ttf");
-        newAccount.setTypeface(boldFont);
-        mFullName.setTypeface(regularFont);
-        mRegitrationNumber.setTypeface(regularFont);
-        mEmailId.setTypeface(regularFont);
-        mPassword.setTypeface(regularFont);
-        mRePassword.setTypeface(regularFont);
 
 
         mAuth = FirebaseAuth.getInstance();
