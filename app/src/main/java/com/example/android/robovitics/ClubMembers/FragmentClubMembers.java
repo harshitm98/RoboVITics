@@ -3,7 +3,9 @@ package com.example.android.robovitics.ClubMembers;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +28,8 @@ import java.util.ArrayList;
  */
 
 public class FragmentClubMembers extends Fragment {
+
+    private static final String TAG = "FragmentClubMembers";
 
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
@@ -56,7 +60,7 @@ public class FragmentClubMembers extends Fragment {
         clubMemberAdapter = new ClubMemberAdapter(getContext(),clubMembersObjects);
 
 
-        addingMembersInClubMembersObject();
+        addingMembersInClubMembersObject(view);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -75,21 +79,27 @@ public class FragmentClubMembers extends Fragment {
         });
     }
 
-    public void  addingMembersInClubMembersObject(){
+    public void  addingMembersInClubMembersObject(final View view){
         childEventListener = new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 ClubMembersObject object = new ClubMembersObject();
                 if(dataSnapshot.child("details").getValue().toString().equals("1")){
-                    object.setsName(dataSnapshot.child("name").getValue().toString());
-                    object.setRegistrationNumber(dataSnapshot.child("reg").getValue().toString());
-                    object.setPhoneNumber(dataSnapshot.child("phone_number").getValue().toString());
-                    object.setRoomNumber(dataSnapshot.child("room_number").getValue().toString());
-                    object.setSkills(dataSnapshot.child("skills").getValue().toString());
-                    object.setEmailId(dataSnapshot.child("email").getValue().toString());
-                    object.setUID(dataSnapshot.child("uid").getValue().toString());
-                    clubMembersObjects.add(object);
-                    listView.setAdapter(clubMemberAdapter);
+                    try{
+                        object.setsName(dataSnapshot.child("name").getValue().toString());
+                        object.setRegistrationNumber(dataSnapshot.child("reg").getValue().toString());
+                        object.setPhoneNumber(dataSnapshot.child("phone_number").getValue().toString());
+                        object.setRoomNumber(dataSnapshot.child("room_number").getValue().toString());
+                        object.setSkills(dataSnapshot.child("skills").getValue().toString());
+                        object.setEmailId(dataSnapshot.child("email").getValue().toString());
+                        object.setUID(dataSnapshot.child("uid").getValue().toString());
+                        clubMembersObjects.add(object);
+                        listView.setAdapter(clubMemberAdapter);
+                    }catch(NullPointerException e){
+                        Log.e(TAG, "onChildAdded: " + e);
+                        Snackbar snackbar = Snackbar.make(view, "Ran into some problem. Admin has been notified",Snackbar.LENGTH_SHORT);
+                        snackbar.show();
+                    }
                 }
             }
 

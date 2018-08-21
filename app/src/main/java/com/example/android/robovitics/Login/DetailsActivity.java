@@ -45,7 +45,6 @@ public class DetailsActivity extends AppCompatActivity {
         user = mAuth.getCurrentUser();
 
         onChangingListener();
-        updateLayout();
 
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,12 +119,5 @@ public class DetailsActivity extends AppCompatActivity {
         }
     }
 
-    private void updateLayout(){
-        boldFont = Typeface.createFromAsset(getAssets(),"montserrat_bold.ttf");
-        regularFont = Typeface.createFromAsset(getAssets(),"montserrat_regular.ttf");
-        phoneNumber.setTypeface(regularFont);
-        roomNumber.setTypeface(regularFont);
-        skills.setTypeface(regularFont);
-        submitButton.setTypeface(boldFont);
-    }
+
 }
