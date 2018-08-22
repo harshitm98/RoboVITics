@@ -95,7 +95,7 @@ public class FragmentB extends Fragment {
                             time = child1.getKey();
                             time = time.replace(" to ", "-");
                             time = time.replace("08", "8");
-                            time = time.replace("09", "8");
+                            time = time.replace("09", "9");
                             people =child1.getValue().toString();
                             FreeSlotsObject object = new FreeSlotsObject();
                             object.setTimes(time);
