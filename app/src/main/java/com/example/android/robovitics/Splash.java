@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.android.robovitics.Login.DetailsActivity;
 import com.example.android.robovitics.Login.LoginActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -44,9 +45,7 @@ public class Splash extends Activity {
                     finish();
                 }
                 else{
-                    Intent intent = new Intent(Splash.this,MainActivity.class);
-                    startActivity(intent);
-                    finish();
+                    checkingForDetails();
                 }
             }
         }, SPLASH_LENGTH);
@@ -62,6 +61,54 @@ public class Splash extends Activity {
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    public void checkingForDetails(){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = database.getReference("pending_member");
+        databaseReference.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                String vVerify, sVerify;
+                vVerify = dataSnapshot.child("uid").getValue().toString();
+                if (vVerify.equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
+                    sVerify = dataSnapshot.child("verify").getValue().toString();
+                    if (sVerify.equals("1")) {
+                        String details = dataSnapshot.child("details").getValue().toString();
+                        if (details.equals("0")) {
+                            Intent i = new Intent(Splash.this, DetailsActivity.class);
+                            startActivity(i);
+                            finish();
+                        } else if (details.equals("1")) {
+                            Intent i = new Intent(Splash.this, MainActivity.class);
+                            startActivity(i);
+                            finish();
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
     }
 
 }

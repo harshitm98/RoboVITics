@@ -118,6 +118,7 @@ public class FreeSlotsFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        getActivity().setTitle("Free Slots");
         mSectionsPagerAdapter = new SectionsPagerAdapter(getChildFragmentManager(),tabLayout.getTabCount(),realTabName);
         viewPager.setAdapter(mSectionsPagerAdapter);
     }

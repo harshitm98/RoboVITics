@@ -20,7 +20,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         FragmentB comn = new FragmentB();
-        return comn.newInstance(tabName.get(position));
+        return comn.newInstance(position);
     }
 
     @Override
