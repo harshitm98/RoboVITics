@@ -24,6 +24,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.android.robovitics.R;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -214,24 +215,13 @@ public class TakeAttendanceActivity extends AppCompatActivity implements Adapter
         uploadAction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(final View view) {
-                AlertDialog.Builder alertDialog = new AlertDialog.Builder(TakeAttendanceActivity.this);
-                alertDialog.setTitle("Are you sure?");
-                alertDialog.setMessage("Are you sure you want to upload the attendance");
-                alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        uploadTheAttendance();
-                    }
-                });
-                alertDialog.setNegativeButton("No", null);
-                alertDialog.show();
+                checkAttendanceForSameDay();
             }
         });
     }
     private void uploadTheAttendance(){
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = firebaseDatabase.getReference();
-
         List<String> notAttended = new ArrayList<>();
         for(int i=0; i<member.size(); i++){
             int flag = 0;
@@ -245,11 +235,6 @@ public class TakeAttendanceActivity extends AppCompatActivity implements Adapter
                 notAttended.add(member.get(i));
             }
         }
-        databaseReference.child("meeting").child(txtDate.getText().toString() + "_" + type).child("date").setValue(txtDate.getText().toString());
-        databaseReference.child("meeting").child(txtDate.getText().toString() + "_" + type).child("type").setValue(type);
-        if(type.equals("Meeting")){
-            databaseReference.child("meeting").child(txtDate.getText().toString() + "_" + type).child("time").setValue(txtTime.getText().toString());
-        }
         String attended = "";
         for(int i=0; i<arrayList.size(); i++){
             attended = attended.concat(arrayList.get(i) + ",");
@@ -259,13 +244,41 @@ public class TakeAttendanceActivity extends AppCompatActivity implements Adapter
             notAttend = notAttend.concat(notAttended.get(i) + ",");
         }
         EditText reason = findViewById(R.id.attendance_reason);
-        databaseReference.child("meeting").child(txtDate.getText().toString() + "_" + type).child("attended").setValue(attended);
-        databaseReference.child("meeting").child(txtDate.getText().toString() + "_" + type).child("not_attended").setValue(notAttend);
-        databaseReference.child("meeting").child(txtDate.getText().toString() + "_" + type).child("reason").setValue(reason.getText().toString());
-        databaseReference.child("meeting").child(txtDate.getText().toString() + "_" + type).child("absentees").setValue(notAttended.size());
-        databaseReference.child("meeting").child(txtDate.getText().toString() + "_" + type).child("attendees").setValue(arrayList.size());
-        Toast.makeText(this, "Attendance uploaded!", Toast.LENGTH_SHORT).show();
-        finish();
+        if(arrayList.size() == 0){
+            Toast.makeText(this, "Please scan the QR code first.", Toast.LENGTH_LONG).show();
+        }else{
+            databaseReference.child("meeting").child(txtDate.getText().toString() + "_" + type).child("date").setValue(txtDate.getText().toString());
+            databaseReference.child("meeting").child(txtDate.getText().toString() + "_" + type).child("type").setValue(type);
+            if(type.equals("Meeting")){
+                String time = txtTime.getText().toString();
+                String[] colonLocation = time.split(":");
+                if(colonLocation[0].length() == 1){
+                    if(colonLocation[1].length() == 1){
+                        time = "0" + colonLocation[0] + ":0" + colonLocation[1];
+                    }
+                    else{
+                        time = "0" + colonLocation[0] + ":" + colonLocation[1];
+                    }
+                }else{
+                    if(colonLocation[1].length() == 1){
+                        time = colonLocation[0] + ":0" + colonLocation[1];
+                    }
+                    else{
+                        time = colonLocation[0] + ":" + colonLocation[1];
+                    }
+                }
+
+                databaseReference.child("meeting").child(txtDate.getText().toString() + "_" + type).child("time").setValue(time);
+            }
+            databaseReference.child("meeting").child(txtDate.getText().toString() + "_" + type).child("attended").setValue(attended);
+            databaseReference.child("meeting").child(txtDate.getText().toString() + "_" + type).child("not_attended").setValue(notAttend);
+            databaseReference.child("meeting").child(txtDate.getText().toString() + "_" + type).child("reason").setValue(reason.getText().toString());
+            databaseReference.child("meeting").child(txtDate.getText().toString() + "_" + type).child("absentees").setValue(notAttended.size());
+            databaseReference.child("meeting").child(txtDate.getText().toString() + "_" + type).child("attendees").setValue(arrayList.size());
+            databaseReference.child("meeting").child(txtDate.getText().toString() + "_" + type).child("uploaded_by").setValue(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
+            Toast.makeText(this, "Attendance uploaded!", Toast.LENGTH_SHORT).show();
+            finish();
+        }
     }
 
     private void settingupmember(){
@@ -298,6 +311,64 @@ public class TakeAttendanceActivity extends AppCompatActivity implements Adapter
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
+            }
+        });
+    }
+
+    private void checkAttendanceForSameDay(){
+        final String meetingText = txtDate.getText().toString() + '_' + type;
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = firebaseDatabase.getReference("");
+        databaseReference.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                if(dataSnapshot.getKey().equals("meeting")){
+                    if(dataSnapshot.getValue().toString().contains(meetingText)){
+                        Toast.makeText(TakeAttendanceActivity.this, "Cannot upload the attendance. Attendance for the " +
+                                "following day already exists. ", Toast.LENGTH_LONG).show();
+                    }else{
+                        if(txtDate.getText().toString().equals("")){
+                            Toast.makeText(TakeAttendanceActivity.this, "Please select the date.", Toast.LENGTH_SHORT).show();
+                        }else{
+                            if(type.equals("Meeting")){
+                                EditText reason = findViewById(R.id.attendance_reason);
+                                String reasonText = reason.getText().toString();
+                                String timeText = txtTime.getText().toString();
+                                if(timeText.equals("") || reasonText.equals("")){
+                                    Toast.makeText(TakeAttendanceActivity.this, "Please fill all the fields.", Toast.LENGTH_SHORT).show();
+                                }else{
+                                    AlertDialog.Builder alertDialog = new AlertDialog.Builder(TakeAttendanceActivity.this);
+                                    alertDialog.setTitle("Are you sure?");
+                                    alertDialog.setMessage("Are you sure you want to upload the attendance");
+                                    alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialogInterface, int i) {
+                                            uploadTheAttendance();
+                                        }
+                                    });
+                                    alertDialog.setNegativeButton("No", null);
+                                    alertDialog.show();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
             }
         });
     }
