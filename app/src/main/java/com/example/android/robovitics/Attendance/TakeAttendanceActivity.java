@@ -5,11 +5,9 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
@@ -33,13 +31,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 public class TakeAttendanceActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
@@ -290,7 +283,7 @@ public class TakeAttendanceActivity extends AppCompatActivity implements Adapter
         profileReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                if(dataSnapshot.child("reg").getValue().toString().startsWith("17")){
+                if (dataSnapshot.child("reg").getValue().toString().startsWith("17") || dataSnapshot.child("reg").getValue().toString().startsWith("18")) {
                     member.add(dataSnapshot.child("name").getValue().toString());
                 }
             }
