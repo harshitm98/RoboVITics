@@ -6,7 +6,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 public class ViewPagerAdapter extends FragmentPagerAdapter {
 
-    private String title[] = {"Lab", "Meeting", "Both"};
+    private String title[] = {"Lab", "Meeting", "All"};
 
 
     public ViewPagerAdapter(FragmentManager fm) {
