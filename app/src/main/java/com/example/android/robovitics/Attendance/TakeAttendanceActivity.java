@@ -119,7 +119,7 @@ public class TakeAttendanceActivity extends AppCompatActivity implements Adapter
                 DatePickerDialog datePickerDialog = new DatePickerDialog(TakeAttendanceActivity.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
-                        txtDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+                        txtDate.setText( (monthOfYear + 1) + "-" + dayOfMonth + "-" + year);
                     }
                 }, mYear, mMonth, mDay);
                 datePickerDialog.show();
@@ -277,7 +277,9 @@ public class TakeAttendanceActivity extends AppCompatActivity implements Adapter
             databaseReference.child("meeting").child(txtDate.getText().toString() + "_" + type).child("attendees").setValue(arrayList.size());
             databaseReference.child("meeting").child(txtDate.getText().toString() + "_" + type).child("uploaded_by").setValue(FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
             Toast.makeText(this, "Attendance uploaded!", Toast.LENGTH_SHORT).show();
-            finish();
+            Intent intent = new Intent(TakeAttendanceActivity.this, AttendanceViewActivity.class);
+            startActivity(intent);
+            finishAffinity();
         }
     }
 
@@ -318,7 +320,7 @@ public class TakeAttendanceActivity extends AppCompatActivity implements Adapter
     private void checkAttendanceForSameDay(){
         final String meetingText = txtDate.getText().toString() + '_' + type;
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference = firebaseDatabase.getReference("");
+        final DatabaseReference databaseReference = firebaseDatabase.getReference("");
         databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -349,6 +351,19 @@ public class TakeAttendanceActivity extends AppCompatActivity implements Adapter
                                     alertDialog.setNegativeButton("No", null);
                                     alertDialog.show();
                                 }
+                            }else{
+                                AlertDialog.Builder alertDialog = new AlertDialog.Builder(TakeAttendanceActivity.this);
+                                alertDialog.setTitle("Are you sure?");
+                                alertDialog.setMessage("Are you sure you want to upload the attendance");
+                                alertDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        uploadTheAttendance();
+                                    }
+                                });
+                                alertDialog.setNegativeButton("No", null);
+                                alertDialog.show();
+
                             }
                         }
                     }

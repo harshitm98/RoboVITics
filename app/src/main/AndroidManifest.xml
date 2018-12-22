@@ -52,7 +52,12 @@
                 android:value="com.example.android.robovitics.MainActivity" />
         </activity>
 
-        <activity android:name=".Attendance.TakeAttendanceActivity" />
+        <activity android:name=".Attendance.TakeAttendanceActivity"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.android.robovitics.MainActivity" />
+        </activity>
         <activity
             android:name=".Attendance.AttendanceViewActivity"
             android:label="Attendance"
