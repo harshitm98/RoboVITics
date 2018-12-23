@@ -4,13 +4,8 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.graphics.Typeface;
-import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.design.widget.TextInputLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.text.TextPaint;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -33,8 +28,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.lang.reflect.Field;
-
 public class LoginActivity extends Activity {
 
     private final String TAG = "LoginActivity";
@@ -51,7 +44,7 @@ public class LoginActivity extends Activity {
     private DatabaseReference databaseReference;
     private ChildEventListener mChildEventListener;
 
-    private Typeface boldFont, regularFont;
+    private Typeface regularFont;
 
     private String sVerify;
     public static String userName;
@@ -61,15 +54,25 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        signInButton = (Button)findViewById(R.id.sign_in);
-        emailId = (EditText)findViewById(R.id.email_id);
-        password = (EditText)findViewById(R.id.password);
-        newAccountText = (TextView)findViewById(R.id.text_new_user);
+        regularFont = Typeface.createFromAsset(getAssets(), "quicksandreg.ttf");
+        signInButton = findViewById(R.id.sign_in);
+        emailId = findViewById(R.id.email_id);
+
+        password = findViewById(R.id.password);
+
+        newAccountText = findViewById(R.id.text_new_user);
+        newAccountText.setTypeface(regularFont);
         newAccountText.setPaintFlags(newAccountText.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-        forgotPasswordText = (TextView)findViewById(R.id.text_forgot_password);
+
+        forgotPasswordText = findViewById(R.id.text_forgot_password);
+        forgotPasswordText.setTypeface(regularFont);
         forgotPasswordText.setPaintFlags(newAccountText.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
-        progressBar = (ProgressBar)findViewById(R.id.login_progress);
-        layout = (LinearLayout)findViewById(R.id.login_linear_layout);
+
+        progressBar = findViewById(R.id.login_progress);
+        layout = findViewById(R.id.login_linear_layout);
+
+        clubName = findViewById(R.id.club_name);
+        clubName.setTypeface(regularFont);
 
         mAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
@@ -147,18 +150,6 @@ public class LoginActivity extends Activity {
                 });
     }
 
-    
-
-    private void editorDelete(){
-        layout.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                emailId.setText("hmhmrock@gmail.com");
-                password.setText("harshit123");
-                return false;
-            }
-        });
-    }
 
     public void listener() {
 
