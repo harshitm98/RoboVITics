@@ -10,8 +10,8 @@ Android application made for roboVITics club which is loaded with features like 
 <td><img src="https://i.imgur.com/zYJUMf8.png"></td>
 </tr>
 <tr>
-<td><img src="https://i.imgur.com/sQdbE1n.png"></td>
-<td><img src="https://i.imgur.com/mYHdMBY.png"></td>
+<td><img src="https://i.imgur.com/agMJUb9.png"></td>
+<td><img src="https://i.imgur.com/UffAE9t.png"></td>
 </tr>
 <tr>
 <td><img src="https://i.imgur.com/gg6plaC.png"></td>
@@ -22,4 +22,3 @@ Android application made for roboVITics club which is loaded with features like 
 <td><img src="https://i.imgur.com/ncsYyVu.png"></td>
 </tr>
 </table>
-
