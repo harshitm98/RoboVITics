@@ -11,11 +11,15 @@ Android application made for roboVITics club which is loaded with features like 
 </tr>
 <tr>
 <td><img src="https://i.imgur.com/sQdbE1n.png"></td>
-<td><img src="https://i.imgur.com/gg6plaC.png"></td>
+<td><img src="https://i.imgur.com/mYHdMBY.png"></td>
 </tr>
 <tr>
+<td><img src="https://i.imgur.com/gg6plaC.png"></td>
 <td><img src="https://i.imgur.com/y8Dm39d.png"></td>
+</tr>
+<tr>
 <td><img src="https://i.imgur.com/0WAlXtc.png"></td>
+<td><img src="https://i.imgur.com/ncsYyVu.png"></td>
 </tr>
 </table>
 
